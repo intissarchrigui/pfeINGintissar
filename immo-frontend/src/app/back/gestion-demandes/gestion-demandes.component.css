@@ -1,0 +1,30 @@
+.IconToDeleteDemande:hover {
+	background-color: #ff4d4d;
+	color: white;
+  }
+
+  
+  .IconToDeleteDemande {
+	padding: 10px;
+	border-radius: 5px;
+	color: #ff4d4d;
+  }  
+  .IconToAcceptDemande {
+	  
+	color:  #04e66a;
+	padding: 10px;
+	border-radius: 5px;
+  }
+  
+  .IconToAcceptDemande:hover {
+	background-color: #04e66a;
+	color: white;
+  }
+  .imgDefaultAdd{
+	width: 7%;
+	height: 7%;
+	border-radius: 80%;
+	float: right;
+	margin-bottom: 3%;
+	margin-right: 5%;
+  }

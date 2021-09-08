@@ -1,0 +1,36 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+   
+    "importHelpers": true,
+    "module": "esnext",
+    "outDir": "./dist/out-tsc",
+    "baseUrl": "src",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowJs": true,
+    
+    /* Advanced Options */
+    "forceConsistentCasingInFileNames": true,
+  
+    "target": "es2015",
+    "typeRoots": [
+      "node_modules/@types"
+      
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ]
+  },
+ /*  "map": {
+    "@angular-material-extensions/google-maps-autocomplete": "node_modules/@angular-material-extensions/google-maps-autocomplete/bundles/google-maps-autocomplete.umd.js",
+  }, */
+  "angularCompilerOptions": {
+    "preserveWhitespaces": false
+  }
+
+}

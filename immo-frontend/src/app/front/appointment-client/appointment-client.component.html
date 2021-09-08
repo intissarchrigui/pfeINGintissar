@@ -1,0 +1,126 @@
+
+
+<app-header></app-header>
+
+    <div class="subheader normal-bg section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+               
+                    <ul class="custom-flex ">
+                        <li class="fw-500">
+                            <a href="index.html" class="text-custom-white">Home</a>
+                        </li>
+                        <li class="active fw-500">
+                            Mes Rendez-vous
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <section id="extended">
+    <div class="row text-left">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+          
+          </div>
+          <div class="card-content">
+            <div class="card-body">
+             
+      
+              <table class="table table-responsive-md text-center">
+                <thead>
+                  <tr>
+                  
+                   
+                    <th>Nom Agence</th>
+                    <th>Titre De l'Annonce</th>
+                    <th>Date Rndez-Vous</th>
+                    <th>Actions</th>
+                  
+                  </tr>
+                </thead>
+                <tbody >
+                    <tr *ngFor="let rdv of RDVs| paginate: { itemsPerPage: 4, currentPage: pa }">
+                     
+                      <td>{{rdv?.agence}}</td>
+                      <td>{{rdv?.annonce}}</td>
+                      <td>{{rdv?.start | date:'M/d/yy, h:mm a'}} </td>
+                      <td> 
+                     
+                          <button type="button" *ngIf='rdv.status!=="Canceled"' (click)='rejectAppointment
+                          (rdv._id)' class="btn btn-raised btn-warning mr-1 pdng">
+                            <i class="ft-x"></i> Annuler
+                          </button>
+                      <!--     <button type="submit" *ngIf='rdv.status!=="Canceled"'  (click)="open();getAppointById(rdv._id)"  class="btn btn-raised btn-primary">
+                            <i class="fa fa-check-square-o"></i> Modifier
+                          </button> -->
+                      
+                    <!--     <button *ngIf='rdv.status!=="Canceled"' (click)='rejectAppointment
+                        (rdv._id)' type="button" class="btn btn-raised btn-round btn-danger" >Annuler</button> -->
+                      </td>
+                    </tr>
+          
+                
+                  </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div   style="float: right">
+        <pagination-controls (pageChange)="pa = $event"></pagination-controls>
+      </div>
+    </div>
+  </section>
+
+
+<!--   <ng-template #modalUpdate let-close="close">
+    <div class="modal-header">
+        <h5 class="modal-title">{{ modalData?.action }}</h5>
+        <button type="button" class="close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="updateForm"  class="form form-horizontal">
+            <div class="form-body">
+              <div class="form-group">
+                   
+                <label class="fs-14 text-custom-black fw-500">Choisir une Date Pour un RDV</label>
+                <select class=" form-control form-control-custom"  name="dispo"    [ngModelOptions]="{standalone: true}" [(ngModel)]="RDV">
+                    <option value="" disabled selected>Choisir une Date</option>
+                    <option *ngFor="let categorie of events"  [value]="categorie.id">{{categorie.start| date :'short':'UTC'}}</option>
+               
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="fs-14 text-custom-black fw-500">Message</label>
+                <div class="input-group group-form">
+                    <textarea
+                    type="textarea"
+                    class="form-control textarea"
+                    style="min-width : 100px;
+                    min-height : 100px;"
+                    [(ngModel)]="commentaire"
+                    [ngModelOptions]="{standalone: true}"
+                  ></textarea>
+                </div>
+            </div>
+
+            </div>
+        </form>			
+    </div>
+    <div class="form-group text-right">
+      <button type="button" class="btn btn-success btn-raised" (click)="updateAppointment();close()"  >Modifier</button>&nbsp;&nbsp;
+      <button type="button" class="btn btn-danger btn-raised mr-1" (click)="close()">Annuler</button>
+  
+    </div>
+  </ng-template> -->
+
+
+
+  <app-footer></app-footer>

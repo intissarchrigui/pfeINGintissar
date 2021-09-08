@@ -1,0 +1,110 @@
+/* div.bouton-aligne{
+	display:inline-block;
+
+	margin:10px 2.5% 10px 2.5%;
+	text-align:center;
+} */
+/* .taille{
+    width:150%;
+    height:100%;
+    margin-left:0%;
+    margin-right:0%;
+    margin-top:0%;
+    margin-bottom:0%;
+    
+} */
+
+
+
+/* agm-map {
+    height: 200px;
+
+  } */
+
+  agm-map {
+    height: 200px;
+  /* width:200px; */
+  }
+ .size{
+width:200px
+  } 
+   .marg{
+  margin-top: 30px;
+}
+  #outer
+{
+    width:100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  
+}
+.inner
+{
+    display: inline-block;
+}
+  
+/*   .autocomplete-container {
+    padding: 1rem 0 1rem 0;
+    width: 50%;
+    z-index:100000 !important;
+
+  }
+  .autocomplete{
+    z-index:1050;
+} */
+
+/*.mat-autocomplete-panel {
+    position: fixed !important;
+    z-index:100000 !important;
+}
+ .cdk-overlay-container {
+    z-index: 2000;
+  } */
+  .modal-backdrop {
+    z-index: 1040 !important;
+
+}
+.modal-content {
+    margin: 2px auto;
+    z-index: 1100 !important;
+ 
+}
+  
+
+.long{
+	width:10px;
+	margin-right:15px;
+}
+
+.IconToDeleteDemande:hover {
+	background-color: #ff4d4d;
+	color: white;
+  }
+
+  
+  .IconToDeleteDemande {
+	padding: 10px;
+	border-radius: 5px;
+	color: #ff4d4d;
+  } 
+  .IconDetails{
+	padding: 10px;
+	border-radius: 5px;
+	color:#38c6f1 ;
+  } 
+  .IconDetails:hover{
+	color: white;
+	background-color:#38c6f1 ;
+  } 
+ 
+  .IconToAcceptDemande {
+	  
+	color:  #04e66a;
+	padding: 10px;
+	border-radius: 5px;
+  }
+  
+  .IconToAcceptDemande:hover {
+	background-color: #04e66a;
+	color: white;
+  }

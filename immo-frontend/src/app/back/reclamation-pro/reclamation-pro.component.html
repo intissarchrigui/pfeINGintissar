@@ -1,0 +1,188 @@
+<div class="row text-left">
+    <div class="col-12">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <!-- <li class="breadcrumb-item">Annonces</li> -->
+          <li class="breadcrumb-item active" aria-current="page"><a routerLink="/reclamationss">Liste des reclamations</a></li>
+        </ol>
+      </nav>
+ 
+    </div>
+
+  </div>
+
+  <section id="extended">
+    <div class="row text-left">
+      <div class="col-sm-12">
+        <div class="card">
+   
+         
+          
+          <div class="card-header">
+            
+           <div class="d-flex flex-wrap justify-content-md-between mb-3 no-gutters">
+        <!--     <div class="inner">
+            <input 
+              type="text"
+              [(ngModel)]="appointmentValue" 
+              name="appointmentValue"
+              class="form-control mb-3"
+              placeholder="Chercher un rendez vous"
+             
+            /> -->
+
+  
+          
+      <div class="btn-group-toggle btn-group d-none d-sm-none d-md-none d-lg-block">
+              <label class="btn-info" ngbButtonLabel>
+                <input type="checkbox" [(ngModel)]="model.pending"  (ngModelChange)="getPendingReclamations()" ngbButton> <b style="color: white;">Reclamations en attente </b>
+              </label>
+              <label class="btn-success" ngbButtonLabel>
+                <input type="checkbox" [(ngModel)]="model.processed"  (ngModelChange)="getProcessedReclamations()"   ngbButton> <b style="color: white;">Reclamations traitées</b>
+              </label>
+          <label class="btn-danger" ngbButtonLabel>
+                <input type="checkbox" [(ngModel)]="model.refused"  (ngModelChange)="getRefusedReclamations()"   ngbButton> <b style="color: white;">Reclamations refusées</b>
+              </label> 
+            </div> 
+
+       
+      <!--      <div  class="inner">
+              <form class="form-inline pull-right">
+              <div class="form-group hidden">
+                <div class="input-group">
+                  <input name="datepicker"
+                         class="form-control"
+                         ngbDatepicker
+                         #datepicker="ngbDatepicker"
+                         [autoClose]="'outside'"
+                         (dateSelect)="onDateSelection($event)"
+                         [displayMonths]="2"
+                         [dayTemplate]="t"
+                         outsideDays="hidden"
+                         [startDate]="fromDate!"
+                         tabindex="-1">
+                  <ng-template #t let-date let-focused="focused">
+                    <span class="custom-day"
+                          [class.focused]="focused"
+                          [class.range]="isRange(date)"
+                          [class.faded]="isHovered(date) || isInside(date)"
+                          (mouseenter)="hoveredDate = date"
+                          (mouseleave)="hoveredDate = null">
+                      {{ date.day }}
+                    </span>
+                  </ng-template>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <input #dpFromDate
+                         class="form-control" placeholder="yyyy-mm-dd"
+                         name="dpFromDate"
+                         [value]="formatter.format(fromDate)"
+                         (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
+                  <div class="input-group-append">
+                    <button class="btn btn-primary calendar" (click)="datepicker.toggle()" type="button"></button>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group ml-2">
+                <div class="input-group">
+                  <input #dpToDate
+                         class="form-control" placeholder="yyyy-mm-dd"
+                         name="dpToDate"
+                         [value]="formatter.format(toDate)"
+                         (input)="toDate = validateInput(toDate, dpToDate.value)">
+                  <div class="input-group-append">
+                    <button class="btn btn-primary calendar" (click)="datepicker.toggle()" type="button"></button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div> -->
+        
+        
+        </div>
+
+          </div>
+
+
+
+
+          <div class="card-content">
+            <div class="card-body">
+             
+         
+              <table class="table table-responsive-md text-center">
+                <thead>
+                  <tr>
+                  
+                    <th></th>
+                    <th>Nom et prénom Client</th>
+                    <!-- <th>Email Client</th> -->
+                    <th>Date Reclamation</th>
+                    <th>Titre</th>
+                    <th>Description</th>
+                    <th>Etat </th>
+                    <th *ngIf="model.pending==true ">Actions </th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let rec of reclamations  ">
+                  <tr >
+                    <td>
+                      <img *ngIf="rec.etat=='Pending'"
+                      src="https://www.flaticon.com/svg/static/icons/svg/753/753254.svg" width="35px" height="35px">
+                     <img *ngIf="rec.etat=='Refused'"
+                      src="https://www.flaticon.com/svg/static/icons/svg/753/753345.svg" width="35px" height="35px">
+                     <img *ngIf="rec.etat=='Processed'"
+                      src="https://www.flaticon.com/svg/static/icons/svg/753/753318.svg" width="35px" height="35px">
+                    </td>
+                    <td>{{rec.client.first_name}} {{rec.client.last_name}}</td>
+                    <!-- <td>{{rec.client.email}}</td> -->
+                    <!-- <td>{{rdv.start | date:'M/d/yy, h:mm a'}} </td> -->
+                       <td>{{rec.date |date :'short':'UTC'}}</td>
+                       <td>{{rec.title}}</td>
+                       <td>{{rec.description}}</td>
+                       <td>
+                      <button *ngIf="rec.etat=='Pending'" class="btn  btn-info " > <b
+                        style="color: white;">En attente </b> </button>
+                        <button *ngIf="rec.etat=='Processed'" class="btn  btn-success pull-left" > <b
+                          style="color: white;">Traité </b> </button>
+                          <button *ngIf="rec.etat=='Refused'" class="btn  btn-danger">
+                             <b style="color: white;">
+                          Refusé</b> </button>
+                       </td>
+                   <!--      <button *ngIf="rec.etat=='Pending'" class="btn  btn-success"
+                     > <b style="color: white;">
+                        Accept</b> </button> -->
+
+    <!--                 
+                     </td> -->
+                    
+                   
+                     <td>
+                      <button *ngIf="rec.etat=='Pending' && model.pending==true" class="btn  btn-success"
+                      (click)='traitReclamation(rec._id)'> <b style="color: white;">
+                        Traiter</b> </button>
+                      <button *ngIf="rec.etat=='Pending' && model.pending==true" class="btn  btn-danger pull-left" (click)="rejectReclamation(rec._id)"> <b
+                        style="color: white;" >Refuser</b> </button>
+                       
+           <!--              <button *ngIf="rdv.status=='Pending'" class="btn  btn-success"
+                      (click)="confirmAppointment(rdv._id)"> <b style="color: white;">
+                        Accept</b> </button>
+            -->
+                    
+                     </td> 
+                   
+                  
+                  </tr>
+        
+              
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+

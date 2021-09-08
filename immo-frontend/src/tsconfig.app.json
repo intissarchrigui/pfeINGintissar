@@ -1,0 +1,22 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/app",
+    "baseUrl": "",
+    "types": [ "googlemaps"],
+       /* Experimental Options */
+       "experimentalDecorators": true, 
+       "emitDecoratorMetadata": true, 
+       /* Advanced Options */
+       "forceConsistentCasingInFileNames": true 
+   
+  
+  },
+  "files": [
+    "main.ts",
+    "polyfills.ts"
+  ],
+  "include": [
+    "src/**/*.d.ts"
+  ]
+}

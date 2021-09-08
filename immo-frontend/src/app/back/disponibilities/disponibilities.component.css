@@ -1,0 +1,18 @@
+#outer
+{
+    width:100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  
+}
+.inner
+{
+    display: inline-block;
+}
+.taillee{
+    width:500px;
+   
+}
+.ttt{
+    margin-left: 100px;
+}

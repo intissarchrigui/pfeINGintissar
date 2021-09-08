@@ -1,0 +1,1434 @@
+<!-- <section id="header-footer"  >
+     
+      
+    <h3 class="text-custom-black  textc"> Annonces favoris</h3>
+<div class="row text-left" matchHeight="card"  >
+
+  <div style="    margin-right: 70px;" class="col-lg-3 col-md-6" *ngFor="let favori of favannonces" >
+    <div class="card"  *ngIf="favori.annonce" style="width: 23rem;     margin-right: 100px;" >
+     
+       
+                <img class="card-img-top service-img animate-img" src="http://localhost:3000/annonce/getFile/{{
+                    favori.annonce?.fileimages[0]
+                  }}" alt="Card image cap">
+        
+            
+
+      <div class="card-content " >
+        <div class="hotel-grid service-box p-relative mb-xl-30"  >
+            <div class="hotel-grid-wrapper bx-wrapper " >
+          
+                <div class="hotel-grid-caption padding-20 bg-custom-white p-relative">
+                    <h4 class="title fs-16"><a href="hotel-detail.html" class="text-custom-black">{{favori.annonce.titre}}<small class="text-light-dark">{{favori.annonce.addresse.ville}}</small></a></h4>
+                    <span class="price"><small></small>{{favori.annonce.prix}} TND</span>
+                    <div class="action">
+                        <a class="btn-first btn-small"  (click)="openDetails(favori.annonce._id)">Détails</a>&nbsp;&nbsp;&nbsp;
+                        <a class="btn-first btn-submit "  (click)="openDetails(favori.annonce._id)">Réserver</a>  
+       
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+      </div>
+
+    </div>
+  </div>
+
+  
+</div> 
+
+</section>
+ -->
+
+
+ <!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from codezion.com/themes/tm/html/toura/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 17 Mar 2021 14:48:07 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="keywords" content="#">
+    <meta name="description" content="#">
+    <title>Toura - Travel Agency Booking Responsive Template </title>
+
+</head>
+<body>
+    <!-- Start Header -->
+    <app-header></app-header>
+    <!-- End Header -->
+    <!-- Start Slider -->
+
+
+    <div   >
+    <div class="slider p-relative">
+             <div>
+             <ngb-carousel>
+            <ng-template ngbSlide>
+                <div class="picsum-img-wrapper">
+                    <img src="assets/assets/images/hotel-1.jpg" alt="Random first slide">
+                </div>
+                <div class="carousel-caption">
+               
+                  
+                </div>
+            </ng-template>
+            <ng-template ngbSlide>
+                <div class="picsum-img-wrapper">
+                    <img src="assets/assets/images/hotel-2.jpg" alt="Random second slide">
+                </div>
+                <div class="carousel-caption">
+              
+                </div>
+            </ng-template>
+            <ng-template ngbSlide>
+                <div class="picsum-img-wrapper">
+                    <img src="assets/assets/images/hotel.jpg" alt="Random third slide">
+                </div>
+                <div class="carousel-caption">
+             
+            
+                </div>
+            </ng-template>
+            </ngb-carousel>
+                <div class="transform-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <div class="slider-content">
+                                    <h1 class="text-custom-blue">La meilleure façon de trouver votre futur  <span class="text-custom-blue">logement  !</span></h1>
+                                    <ul class="custom">
+                                        <li class="text-custom-blue">
+                                            <i class="fas fa-building"></i>
+                                            Plus 1000 Annonces
+                                        </li>
+                                        <li class="text-custom-blue">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            Plus que 500,000 places
+                                        </li>
+                                        <li class="text-custom-blue">
+                                            <i class="fas fa-dollar-sign"></i>
+                                            Meilleurs prix Annonces
+                                        </li>
+                                        <li class="text-custom-blue">
+                                            <i class="fas fa-comments"></i>
+                                           Service Client 24 heures
+                                        </li>
+                                    </ul>
+                                    <a [routerLink]="['/register']"  class="btn-first btn-small">Créer votre Compte</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+      
+    </div>
+    <!-- End Slider -->
+    <!-- Start Banner tabs -->
+   
+    <div class="banner-tabs">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="tabs">
+                        <ul class="custom-flex nav nav-tabs">
+                        <!--     <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#tout">Tout</a>
+                              </li> -->
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#louer">A louer </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#vendre">A vendre</a>
+                            </li>
+      <!--                       <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#cars">Cars</a>
+                            </li> -->
+ 
+                        </ul>
+                        <div class="tab-content bg-custom-white bx-wrapper padding-20">
+                  <!--         <div class="tab-pane active" id="tout">
+                              <div class="tab-inner">
+                                  <form [formGroup]="filtreFormTout">
+                                      <div class="row">
+                                        <div class="col-lg-4 col-md-6">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                  <div class="form-group">
+                                                      <label class="fs-14 text-custom-black fw-500">Catégorie</label>
+   
+                                                        
+                    <select name="categorie"  id="categorie" (change)='onChangeCategorie($event)' formControlName="categorie"class="form-control form-control-custom" >
+                        <option selected="true" disabled="disabled">Catégorie</option>
+                        <option *ngFor="let categorie of categories"  [value]="categorie">{{categorie}}</option>
+        
+                      </select>
+                                               
+                                                  </div>
+                                                </div>
+                                                <div class="col-6">
+                                                  <div class="form-group">
+                                                      <label class="fs-14 text-custom-black fw-500">Région</label>
+                                                      <select class='form-control form-control-custom' style="display: inline-block;" placeholder="Ville" id="ville" name="ap"  formControlName="addresse" required [(ngModel)]="villa" >
+                                                        <option [ngValue]="null" [disabled]="true" >Choisir une Région</option>
+                                                        <option *ngFor="let method of Villes"  [value]="method.nom ">{{ method.nom }}</option>
+                                                    </select>
+  
+                                                  </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+  
+ 
+                                        <div class="col-lg-3 col-md-6">
+                                            <div class="form-group " >
+                                                <label class="fs-14 text-custom-black fw-500">Prix</label>
+                                                <div fxLayout="row">
+                                                <input fxFlex="50" type="number" name="#" formControlName="prixMin"  class="form-control form-control-custom" placeholder="Min">&nbsp;&nbsp;
+                                                <input fxFlex="50" type="number" name="#" formControlName="prixMax"  class="form-control form-control-custom" placeholder="Max">
+                                            </div>
+                                            </div>
+                                        </div>  
+                                           
+                                        <div  *ngIf="selectedCategorie!='appartement' && selectedCategorie!='maison' && selectedCategorie!='terrain'"class="col-lg-2 col-md-6">
+                                            <label class="submit"></label>
+                                              <button type="submit" (click)="submitFilterTout()" class="btn-first btn-submit full-width btn-height">Chercher</button>
+                                          </div> 
+                                          <div class="col-lg-8 col-md-8">
+                                    <div class="row" *ngIf="selectedCategorie!='appartement' && selectedCategorie!='maison' && selectedCategorie!='terrain'">
+                                        
+                                            <div class="col-4" >
+                                                <div class="form-group">
+                                                    <label class="fs-14 text-custom-black fw-500"></label>
+                                                    <div class="form-control ">
+                                               
+                                                   <a (click)="getOptions()"   style="color:rgb(115, 144, 172);">Recherche avancée</a>
+                                                </div> 
+                                            </div> 
+                                        </div>   
+                                        <div class="col-4">
+                                        <div class="form-group">
+                                            <label class="fs-14 text-custom-black fw-500"></label>
+                                            <div class="form-control ">
+                                            <i  class="fas fa-edit font-medium-3 mr-2 color " title="Modifier"></i>
+                                           <a    onclick='window.open("http://localhost:4200/customizer")'
+                                           
+                                           style="color:orangered"> Dessiner sur la carte</a>
+                                        </div>  
+                                    </div>
+                                    </div>
+                                      </div>
+                                    </div> 
+                                        </div>  
+                                 
+                                   
+
+
+                <div class="row" *ngIf="model.appartement==true ||model.maison==true">
+                                        <div class="col-lg-8 col-md-8">
+                                            <div class="row">
+                                                <div class=" col-4">
+                                                    <div class="form-group">
+                                                        <label class="fs-14 text-custom-black fw-500">Superfecie</label>                                       
+                                                        <input type="number" name="#" formControlName="superfecie"  class="form-control form-control-custom" placeholder="Superfecie">                          
+                                                        </div>
+                                                </div>
+                                                <div class="col-4">
+                                                  <div class="form-group">
+                                                  <label class="fs-14 text-custom-black fw-500">Nombre de chambres</label>                                       
+                                                  <select name="nbre_chambres"  id="nbre_chambres" (change)='onChangeChambre($event)'  formControlName="nbre_chambres"class="form-control form-control-custom" >
+                                                    <option selected disabled>nombre chambres</option>
+                                                  <option *ngFor="let nbre_chambres of chambres"  [value]="nbre_chambres">{{nbre_chambres}}</option>      
+                                                  </select>                            
+                                                  </div>
+                                                </div>
+                                                <div class=" col-4">
+                                                    <div class="form-group">
+                                                        <label class="fs-14 text-custom-black fw-500">Nombre de salle bains</label>                                       
+                                                        <select name="pieces_salleBain"  id="pieces_salleBain" (change)='onChangeBain($event)' formControlName="pieces_salleBain"class="form-control form-control-custom" >
+                                                            <option disabled selected>salle de bains</option>
+                                                        <option *ngFor="let pieces_salleBain of bains"  [value]="pieces_salleBain">{{pieces_salleBain}}</option>      
+                                                        </select>                            
+                                                        </div>
+                                                </div>
+                                           
+                                            </div>
+                                        </div>
+                                   
+ 
+                                         
+                                      </div>
+                                      <div class="row" *ngIf="model.terrain==true ">
+                                        <div class="col-lg-8 col-md-8">
+                                            <div class="row">
+                                                <div class=" col-4">
+                                                    <div class="form-group">
+                                                        <label class="fs-14 text-custom-black fw-500">Superfecie</label>                                       
+                                                        <input type="number" name="#" formControlName="superfecie"  class="form-control form-control-custom" placeholder="Superfecie">                          
+                                                        </div>
+                                                </div>
+                                                <div class="col-lg-2 col-md-6">
+                                                    <label class="submit"></label>
+                                                      <button  style="margin-right: 0%;"type="submit" (click)="submitFilterTout()" class="btn-first btn-submit full-width btn-height">Chercher</button>
+                                                  </div> 
+                                           
+                                            </div>
+                                        </div>
+                                   
+
+                                       
+                                         
+                                      </div>
+                                      <div class="row" *ngIf="model.appartement==true ||model.maison==true">
+                                  
+                                        <div  >
+                                            <label class="fs-14 text-custom-black fw-500">Commodités</label>
+                                            <div   id="outer">
+                                            <div  class="inner">
+                                            <input  type="checkbox"  value="climatisation" id="climatisation" name="climatisation" [(ngModel)]="climatisation" (change)="onChange(climatisation)" formControlName="climatisation"
+                                            [ngClass]="{ 'is-invalid': submitted && addFormControls.climatisation.errors }" required/>
+                                            &nbsp;<label class="form-check-label" for="climatisation">
+                                              Climatisation
+                                            </label>
+                                          </div>&nbsp; &nbsp; &nbsp;
+                                          <div  class="inner">
+                                            <input  type="checkbox" value="meuble" id="meuble" [(ngModel)]="meuble" (change)="onChange(meuble)" name="meuble" formControlName="meuble" checked   
+                                             [ngClass]="{ 'is-invalid': submitted && addFormControls.meuble.errors }" required/>
+                                             &nbsp;<label class="form-check-label" for="meuble">
+                                              Meuble
+                                            </label>
+                                            </div>&nbsp; &nbsp; &nbsp;
+                                            <div  class="inner">
+                                              <input  type="checkbox" value="ascenseur" id="ascenseur"  [(ngModel)]="ascenseur" (change)="onChange(ascenseur)" name="ascenseur" formControlName="ascenseur" 
+                                              [ngClass]="{ 'is-invalid': submitted && addFormControls.ascenseur.errors }" required/>
+                                              &nbsp;<label class="form-check-label" for="ascenseur">
+                                               Ascenseur
+                                              </label>
+                                              </div>&nbsp; &nbsp; &nbsp;
+                                              <div  class="inner">
+                                                <input  type="checkbox" value="jardin" id="jardin" [(ngModel)]="jardin" (change)="onChange(jardin)" name="jardin" formControlName="jardin"
+                                                [ngClass]="{ 'is-invalid': submitted && addFormControls.jardin.errors }" required/>
+                                                &nbsp;<label class="form-check-label" for="jardin">
+                                                 Jardin
+                                                </label>
+                                                </div>
+                                            </div>
+                                            &nbsp; &nbsp;
+                                            <div   id="outer">
+                                              <div  class="inner">
+                                              <input  type="checkbox"  value="chauffage" id="chauffage" [(ngModel)]="chauffage" (change)="onChange(chauffage)" name="chauffage" formControlName="chauffage"
+                                              [ngClass]="{ 'is-invalid': submitted && addFormControls.chauffage.errors }" required/>
+                                              &nbsp;<label class="form-check-label" for="chauffage">
+                                                Chauffage centrale 
+                                              </label>
+                                            </div>&nbsp; &nbsp; &nbsp;
+                                            <div  class="inner">
+                                              <input  type="checkbox" value="cuisine" id="cuisine" [(ngModel)]="cuisine" (change)="onChange(cuisine)" name="cuisine" formControlName="cuisine" 
+                                              [ngClass]="{ 'is-invalid': submitted && addFormControls.cuisine.errors }" required/>
+                                              &nbsp;<label class="form-check-label" for="cuisine">
+                                                Cuisine equipé
+                                              </label>
+                                              </div>&nbsp; &nbsp; &nbsp;
+                                              <div  class="inner">
+                                                <input  type="checkbox" value="parking" id="parking" [(ngModel)]="parking" (change)="onChange(parking)" name="parking" formControlName="parking" checked
+                                                [ngClass]="{ 'is-invalid': submitted && addFormControls.parking.errors }" required/>
+                                                &nbsp;<label class="form-check-label" for="parking">
+                                                 Parking
+                                                </label>
+                                                </div>&nbsp; &nbsp; &nbsp;
+                                           
+                                              </div>
+                                          </div>
+                                        
+                                          <div class="col-lg-3 col-md-6">
+                                            <label class="submit"></label>
+                                              <button  style="margin-right: 0%;"type="submit" (click)="submitFilterTout()" class="btn-first btn-submit full-width btn-height">Chercher</button>
+                                          </div> 
+                                          <div class="col-lg-6 col-md-10
+                                          ">
+                                          
+                                            <label class="submit"></label>
+                                            <button type="submit"  onclick='window.open("http://localhost:4200/customizer")'   style="width:200px;" class="btn-first btn-submit full-width btn-height">Dessiner sur la carte</button>
+                               
+                                         </div>
+                                      </div>
+                                    
+                                  </form>
+                              </div>
+                          </div> -->
+                          <div class="tab-pane active" id="louer">
+                       <!--        <div class="tab-inner">
+                                  <form>
+                                      <div class="row">
+                                          <div class="col-lg-4 col-md-6">
+                                              <div class="form-group">
+                                                  <label class="fs-14 text-custom-black fw-500">Leaving From</label>
+                                                  <input type="text" name="#" class="form-control form-control-custom" placeholder="city, distirct or specific airpot">
+                                              </div>
+                                              <div class="form-group">
+                                                  <label class="fs-14 text-custom-black fw-500">Going From</label>
+                                                  <input type="text" name="#" class="form-control form-control-custom" placeholder="city, distirct or specific airpot">
+                                              </div>
+                                          </div>
+                                          <div class="col-lg-4 col-md-6">
+                                              <div class="row">
+                                                  <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="fs-14 text-custom-black fw-500">Catégorie</label>
+                                                        <div class="group-form">
+                                                          <select class=" form-control form-control-custom">
+                                                              <option>Appartement</option>
+                                                              <option>Maison</option>
+                                                              <option>Terrain</option>
+                                                          </select>
+                                                        </div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-6">
+                                                      <div class="form-group">
+                                                          <label class="submit"></label>
+                                                          <div class="group-form">
+                                                            <select class="custom-select form-control form-control-custom">
+                                                                <option>Anytime</option>
+                                                                <option>Morning</option>
+                                                            </select>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="row">
+                                                  <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="fs-14 text-custom-black fw-500">Région</label>
+                                                        <div class="group-form">
+                                                          <select class=" form-control form-control-custom">
+                                                              <option>Tunis</option>
+                                                              <option>Sousse</option>
+                                                             
+                                                          </select>
+                                                        </div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-6">
+                                                      <div class="form-group">
+                                                          <label class="submit"></label>
+                                                          <div class="group-form">
+                                                            <select class="custom-select form-control form-control-custom">
+                                                                <option>Anytime</option>
+                                                                <option>Morning</option>
+                                                            </select>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <div class="col-lg-4 col-md-12">
+                                              <div class="row">
+                                                  <div class="col-3">
+                                                      <div class="form-group">
+                                                          <label class="fs-14 text-custom-black fw-500">Adults</label>
+                                                          <div class="group-form">
+                                                            <select class="custom-select form-control form-control-custom">
+                                                                <option>01</option>
+                                                                <option>02</option>
+                                                               
+                                                            </select>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <div class="col-3">
+                                                      <div class="form-group">
+                                                          <label class="fs-14 text-custom-black fw-500">Kids</label>
+                                                          <div class="group-form">
+                                                            <select class="custom-select form-control form-control-custom">
+                                                                <option>01</option>
+                                                                <option>02</option>
+                                                               
+                                                            </select>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="fs-14 text-custom-black fw-500">Promocode</label>
+                                                        <input type="text" name="#" class="form-control form-control-custom" placeholder="type here">
+                                                      </div>
+                                                  </div>
+                                                  <div class="col-6">
+                                                      <div class="form-group">
+                                                          <label class="fs-14 text-custom-black fw-500">E
+                                                              nfants</label>
+                                                          <div class="group-form">
+                                                            <select class="custom-select form-control form-control-custom">
+                                                                <option>01</option>
+                                                                <option>02</option>
+                                                               
+                                                            </select>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <div class="col-6">
+                                                      <div class="form-group">
+                                                          <label class="submit"></label>
+                                                          <button class="btn-first btn-submit full-width btn-height">Search</button>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </form>
+                              </div> -->
+                              <div class="tab-inner">
+                                <form [formGroup]="filtreFormLouer">
+                                    <div class="row">
+                                      <div class="col-lg-4 col-md-6">
+                                          <div class="row">
+                                              <div class="col-6">
+                                                <div class="form-group">
+                                                    <label class="fs-14 text-custom-black fw-500">Catégorie</label>
+                                      <!--               <ng-multiselect-dropdown #multiSelect
+                                                    [placeholder]="'Select City'" 
+                                                    [data]="dropdownList" 
+                                                    [formControl]="f.categorie" 
+                                                    ngDefaultControl
+                                                    [settings]="dropdownSettings"
+                                                   name="categorie"
+                                                    (onSelect)="onItemSelect($event)" 
+                                                
+                                            >
+                                                    </ng-multiselect-dropdown> -->
+ 
+                                                
+                  <select name="categorie"  id="categorie" (change)='onChangeCategorie($event)' formControlName="categorie"class="form-control form-control-custom" >
+                      <option selected="true" disabled="disabled">Catégorie</option>
+                      <option *ngFor="let categorie of categories"  [value]="categorie">{{categorie}}</option>
+      
+                    </select>
+                                        
+                                                </div>
+                                              </div>
+                                    <!--           <div class="col-6">
+                                                <div class="form-group">
+                                                    <label class="fs-14 text-custom-black fw-500">Régions</label>
+                                                    <input type="text" name="#" formControlName="region" class="form-control form-control-custom" placeholder="Taper votre recherche" >
+
+                                                </div>
+                                              </div> -->
+                                              
+                                              <div class="col-6">
+                                                <div class="form-group">
+              
+
+                                                <label class="fs-14 text-custom-black fw-500">Région</label>
+                                                <select class='form-control form-control-custom'  style="display: inline-block;" placeholder="Ville" id="ville" name="ap"  formControlName="addresse" required [(ngModel)]="villa" >
+                                                  <option [ngValue]="null" [disabled]="true" >Région</option>
+                                                  <option *ngFor="let method of Villes"  [value]="method.nom ">{{ method.nom }}</option>
+                                              </select>
+                                            </div>
+                                            </div>
+                                              <!--     <input  type="text" class='taille' placeholder="Rue" formControlName="rue"                 
+      [ngClass]="{ 'is-invalid': submitted && addFormControls.rue.errors }" required/> -->
+<!--       <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+            <label >Délégation</label>
+      <select class='form-control form-control-custom' style="display: inline-block;" placeholder="delegation" name="ap" formControlName="delegation"  required [(ngModel)]="delegation"  >
+        <option [ngValue]="null" [disabled]="true" >Choisir une Délegation</option>
+        <option *ngFor="let method of delegations" [ngValue]="method">{{ method.nom }}</option>
+    </select>
+</div>
+</div> -->
+
+                                          </div>
+                                      </div>
+
+                                      <div class="col-lg-3 col-md-6">
+                                        <div class="form-group " >
+                                            <label class="fs-14 text-custom-black fw-500">Prix</label>
+                                            <div fxLayout="row">
+                                            <input fxFlex="50" type="number" name="#" formControlName="prixMin"  class="form-control form-control-custom" placeholder="Min">&nbsp;&nbsp;
+                                            <input fxFlex="50" type="number" name="#" formControlName="prixMax"  class="form-control form-control-custom" placeholder="Max">
+                                        </div>
+                                        </div>
+                                    </div>  
+
+
+                                      
+                                         
+                                      <div  *ngIf="selectedCategorie!='appartement' && selectedCategorie!='maison' && selectedCategorie!='terrain'"class="col-lg-2 col-md-6">
+                                          <label class="submit"></label>
+                                            <button type="submit" (click)="submitFilterLouer()" class="btn-first btn-submit full-width btn-height">Chercher</button>
+                                        </div> 
+
+                                        <div class="col-lg-8 col-md-8">
+                                            <div class="row" *ngIf="selectedCategorie!='appartement' && selectedCategorie!='maison' && selectedCategorie!='terrain'">
+                                                
+                                                    <div class="col-4" >
+                                                        <div class="form-group">
+                                                            <label class="fs-14 text-custom-black fw-500"></label>
+                                                            <div class="form-control ">
+                                                       
+                                                           <a (click)="getOptions()"   style="color:rgb(115, 144, 172);">Recherche avancée</a>
+                                                        </div> 
+                                                    </div> 
+                                                </div>   
+                                                <div class="col-4">
+                                                <div class="form-group">
+                                                    <label class="fs-14 text-custom-black fw-500"></label>
+                                                    <div class="form-control ">
+                                                    <i  class="fas fa-edit font-medium-3 mr-2 color " title="Modifier"></i>
+                                                   <a  onclick='window.open("http://localhost:4200/customizer")'
+                                                   
+                                                   
+                                                   style="color:orangered">Dessiner sur la carte</a>
+                                                </div>  
+                                            </div>
+                                            </div>
+                                              </div>
+                                            </div>                 
+                                    </div>
+              <div class="row" *ngIf="selectedCategorie=='appartement' ||selectedCategorie=='maison'">
+                                      <div class="col-lg-8 col-md-8">
+                                          <div class="row">
+                                              <div class=" col-4">
+                                                  <div class="form-group">
+                                                      <label class="fs-14 text-custom-black fw-500">Superfecie</label>                                       
+                                                      <input type="number" name="superfecie" formControlName="superfecie"  class="form-control form-control-custom" placeholder="Superfecie">                          
+                                                      </div>
+                                              </div>
+                                              <div class="col-4">
+                                                <div class="form-group">
+                                                <label class="fs-14 text-custom-black fw-500">Nombre de chambres</label>                                       
+                                                <select name="nbre_chambres"  id="nbre_chambres" (change)='onChangeChambre($event)'  formControlName="nbre_chambres"class="form-control form-control-custom" >
+                                                  <option selected disabled>nombre chambres</option>
+                                                <option *ngFor="let nbre_chambres of chambres"  [value]="nbre_chambres">{{nbre_chambres}}</option>      
+                                                </select>                            
+                                                </div>
+                                              </div>
+                                              <div class=" col-4">
+                                                  <div class="form-group">
+                                                      <label class="fs-14 text-custom-black fw-500">Nombre de salle bains</label>                                       
+                                                      <select name="pieces_salleBain"  id="pieces_salleBain" (change)='onChangeBain($event)' formControlName="pieces_salleBain"class="form-control form-control-custom" >
+                                                          <option disabled selected>salle de bains</option>
+                                                      <option *ngFor="let pieces_salleBain of bains"  [value]="pieces_salleBain">{{pieces_salleBain}}</option>      
+                                                      </select>                            
+                                                      </div>
+                                              </div>
+                                         
+                                          </div>
+                                      </div>
+                                 
+<!-- 
+                                      <div class="col-lg-4 col-md-6">
+                                          <div class="form-group">
+                                              <label class="fs-14 text-custom-black fw-500">Superfecie</label>
+                                              <input type="number" name="#" formControlName="prix"  class="form-control form-control-custom" placeholder="Taper votre recherche">
+                                          </div>
+                                      </div>  -->
+                                     
+                                       
+                                    </div>
+                                    <div class="row" *ngIf=" selectedCategorie=='terrain'">
+                                      <div class="col-lg-8 col-md-8">
+                                          <div class="row">
+                                              <div class=" col-4">
+                                                  <div class="form-group">
+                                                      <label class="fs-14 text-custom-black fw-500">Superfecie</label>                                       
+                                                      <input type="number" name="#" formControlName="superfecie"  class="form-control form-control-custom" placeholder="Superfecie">                          
+                                                      </div>
+                                              </div>
+                                              <div class="col-lg-3 col-md-6">
+                                                  <label class="submit"></label>
+                                                    <button  style="margin-right: 0%;"type="submit" (click)="submitFilterLouer()" class="btn-first btn-submit full-width btn-height">Chercher</button>
+                                                </div> 
+                                                <div class="col-lg-6 col-md-6
+                                                ">
+                                                  <!-- <i  class="fas fa-edit font-medium-3 mr-2 color " title="Modifier"></i> -->
+                                                  <label class="submit"></label>
+                                                  <button type="submit"  onclick='window.open("http://localhost:4200/customizer")'   style="width:200px;" class="btn-first btn-submit full-width btn-height">Dessiner sur la carte</button>
+                                     
+                                               </div>
+                                         
+                                          </div>
+                                      </div>
+                                 
+<!-- 
+                                      <div class="col-lg-4 col-md-6">
+                                          <div class="form-group">
+                                              <label class="fs-14 text-custom-black fw-500">Superfecie</label>
+                                              <input type="number" name="#" formControlName="prix"  class="form-control form-control-custom" placeholder="Taper votre recherche">
+                                          </div>
+                                      </div>  -->
+                                     
+                                       
+                                    </div>
+                                    <div class="row" *ngIf="selectedCategorie=='appartement' ||selectedCategorie=='maison'">
+                                
+                                      <div  >
+                                          <label class="fs-14 text-custom-black fw-500">Commodités</label>
+                                          <div   id="outer">
+                                          <div  class="inner">
+                                          <input  type="checkbox"  value="climatisation" id="climatisation" name="climatisation" [(ngModel)]="climatisation" (change)="onChange(climatisation)" formControlName="climatisation"
+                                          [ngClass]="{ 'is-invalid': submitted && addFormControls.climatisation.errors }" required/>
+                                          &nbsp;<label class="form-check-label" for="climatisation">
+                                            Climatisation
+                                          </label>
+                                        </div>&nbsp; &nbsp; &nbsp;
+                                        <div  class="inner">
+                                          <input  type="checkbox" value="meuble" id="meuble" [(ngModel)]="meuble" (change)="onChange(meuble)" name="meuble" formControlName="meuble" checked   
+                                           [ngClass]="{ 'is-invalid': submitted && addFormControls.meuble.errors }" required/>
+                                           &nbsp;<label class="form-check-label" for="meuble">
+                                            Meuble
+                                          </label>
+                                          </div>&nbsp; &nbsp; &nbsp;
+                                          <div  class="inner">
+                                            <input  type="checkbox" value="ascenseur" id="ascenseur"  [(ngModel)]="ascenseur" (change)="onChange(ascenseur)" name="ascenseur" formControlName="ascenseur" 
+                                            [ngClass]="{ 'is-invalid': submitted && addFormControls.ascenseur.errors }" required/>
+                                            &nbsp;<label class="form-check-label" for="ascenseur">
+                                             Ascenseur
+                                            </label>
+                                            </div>&nbsp; &nbsp; &nbsp;
+                                            <div  class="inner">
+                                              <input  type="checkbox" value="jardin" id="jardin" [(ngModel)]="jardin" (change)="onChange(jardin)" name="jardin" formControlName="jardin"
+                                              [ngClass]="{ 'is-invalid': submitted && addFormControls.jardin.errors }" required/>
+                                              &nbsp;<label class="form-check-label" for="jardin">
+                                               Jardin
+                                              </label>
+                                              </div>
+                                          </div>
+                                          &nbsp; &nbsp;
+                                          <div   id="outer">
+                                            <div  class="inner">
+                                            <input  type="checkbox"  value="chauffage" id="chauffage" [(ngModel)]="chauffage" (change)="onChange(chauffage)" name="chauffage" formControlName="chauffage"
+                                            [ngClass]="{ 'is-invalid': submitted && addFormControls.chauffage.errors }" required/>
+                                            &nbsp;<label class="form-check-label" for="chauffage">
+                                              Chauffage centrale 
+                                            </label>
+                                          </div>&nbsp; &nbsp; &nbsp;
+                                          <div  class="inner">
+                                            <input  type="checkbox" value="cuisine" id="cuisine" [(ngModel)]="cuisine" (change)="onChange(cuisine)" name="cuisine" formControlName="cuisine" 
+                                            [ngClass]="{ 'is-invalid': submitted && addFormControls.cuisine.errors }" required/>
+                                            &nbsp;<label class="form-check-label" for="cuisine">
+                                              Cuisine equipé
+                                            </label>
+                                            </div>&nbsp; &nbsp; &nbsp;
+                                            <div  class="inner">
+                                              <input  type="checkbox" value="parking" id="parking" [(ngModel)]="parking" (change)="onChange(parking)" name="parking" formControlName="parking" checked
+                                              [ngClass]="{ 'is-invalid': submitted && addFormControls.parking.errors }" required/>
+                                              &nbsp;<label class="form-check-label" for="parking">
+                                               Parking
+                                              </label>
+                                              </div>&nbsp; &nbsp; &nbsp;
+                                         
+                                            </div>
+                                        </div>
+                                      
+                                        <div class="col-lg-5 col-md-6">
+                                        <!--   <label class="submit"></label>
+                                            <button  style="margin-right: 0%;"type="submit" (click)="submitFilterLouer()" class="btn-first btn-submit full-width btn-height">Chercher</button> -->
+                                        </div> 
+
+                                        <div class="col-lg-5 col-md-10
+                                        ">
+                                        <label class="submit"></label>
+                                        <button  style="margin-right: 0%;"type="submit" (click)="submitFilterLouer()" class="btn-first btn-submit full-width btn-height">Chercher</button> 
+                                       </div>
+
+                                       <div class="col-lg-6 col-md-10
+                                       ">
+                                         <!-- <i  class="fas fa-edit font-medium-3 mr-2 color " title="Modifier"></i> -->
+                                         <label class="submit"></label>
+                                         <button type="submit"  onclick='window.open("http://localhost:4200/customizer")'   style="width:200px;" class="btn-first btn-submit full-width btn-height">Dessiner sur la carte</button>
+                            
+                                      </div>
+
+                                    </div>
+                                  
+                                </form>
+                            </div>
+                            </div>
+                          <div class="tab-pane" id="vendre">
+                 <!--              <div class="tab-inner">
+                                  <form>
+                                      <div class="row">
+                                          <div class="col-lg-4 col-md-6">
+                                              <div class="form-group">
+                                                  <label class="fs-14 text-custom-black fw-500">Mot clé</label>
+                                                  <input type="text" name="#" class="form-control form-control-custom" placeholder="Taper votre recherche ">
+                                              </div>
+                                          </div>
+                                          <div class="col-lg-4 col-md-6">
+                                              <div class="row">
+                                                  <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="fs-14 text-custom-black fw-500">Région</label>
+                                                        <div class="group-form">
+                                                          <select class=" form-control form-control-custom">
+                                                              <option>Tunis</option>
+                                                              <option>Sousse</option>
+                                                             
+                                                          </select>
+                                                        </div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-6">
+                                                      <div class="form-group">
+                                                          <label class="fs-14 text-custom-black fw-500">Cruise Length</label>
+                                                          <div class="group-form">
+                                                            <select class="custom-select form-control form-control-custom">
+                                                                <option>1-2 Nights</option>
+                                                                <option>3-4 Nights</option>
+                                                            </select>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <div class="col-lg-4 col-md-12">
+                                            <div class="row">
+                                                  <div class="col-6">
+                                                      <div class="form-group">
+                                                          <label class="fs-14 text-custom-black fw-500">Cruise Line</label>
+                                                          <div class="group-form">
+                                                            <select class="custom-select form-control form-control-custom">
+                                                                <option>Azamara Club Cruises</option>
+                                                                <option>Carnival Cruise Lines</option>
+                                                                <option>Celebrity Cruises</option>
+                                                                <option>Costa Cruise Lines</option>
+                                                                <option>Cruise &amp; Maritime Voyages</option>
+                                                                <option>Crystal Cruises</option>
+                                                                <option>Cunard Line Ltd.</option>
+                                                                <option>Disney Cruise Line</option>
+                                                                <option>Holland America Line</option>
+                                                                <option>Hurtigruten Cruise Line</option>
+                                                                <option>MSC Cruises</option>
+                                                                <option>Norwegian Cruise Line</option>
+                                                                <option>Oceania Cruises</option>
+                                                                <option>Orion Expedition Cruises</option>
+                                                                <option>P&amp;O Cruises</option>
+                                                                <option>Paul Gauguin Cruises</option>
+                                                                <option>Peter Deilmann Cruises</option>
+                                                                <option>Princess Cruises</option>
+                                                                <option>Regent Seven Seas Cruises</option>
+                                                                <option>Royal Caribbean International</option>
+                                                                <option>Seabourn Cruise Line</option>
+                                                                <option>Silversea Cruises</option>
+                                                                <option>Star Clippers</option>
+                                                                <option>Swan Hellenic Cruises</option>
+                                                                <option>Thomson Cruises</option>
+                                                                <option>Viking River Cruises</option>
+                                                                <option>Windstar Cruises</option>
+                                                            </select>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <div class="col-6">
+                                                      <label class="submit"></label>
+                                                        <button type="submit" class="btn-first btn-submit full-width btn-height">Search Now</button>
+                                                  </div>
+                                              </div>
+                                            
+                                          </div>
+                                      </div>
+                                  </form>
+                              </div> -->
+                              <div class="tab-inner">
+                                <form [formGroup]="filtreFormVendre">
+                                    <div class="row">
+                                      <div class="col-lg-4 col-md-6">
+                                          <div class="row">
+                                              <div class="col-6">
+                                                <div class="form-group">
+                                                    <label class="fs-14 text-custom-black fw-500">Catégorie</label>
+ 
+                                                      
+                  <select name="categorie"  id="categorie" (change)='onChangeCategorie($event)' formControlName="categorie"class="form-control form-control-custom" >
+                      <option selected="true" disabled="disabled">Catégorie</option>
+                      <option *ngFor="let categorie of categories"  [value]="categorie">{{categorie}}</option>
+      
+                    </select>
+                                             
+                                                </div>
+                                              </div>
+                                              <div class="col-6">
+                                                <div class="form-group">
+              
+
+                                                <label class="fs-14 text-custom-black fw-500">Région</label>
+                                                <select class='form-control form-control-custom' style="display: inline-block;" placeholder="Ville" id="ville" name="ap"  formControlName="addresse" required [(ngModel)]="villa" >
+                                                  <option [ngValue]="null" [disabled]="true" >Choisir une Région</option>
+                                                  <option *ngFor="let method of Villes"  [value]="method.nom ">{{ method.nom }}</option>
+                                              </select>
+                                            </div>
+                                            </div>
+                                              
+                                          </div>
+                                      </div>
+
+                                      <div class="col-lg-3 col-md-6">
+                                        <div class="form-group " >
+                                            <label class="fs-14 text-custom-black fw-500">Prix</label>
+                                            <div fxLayout="row">
+                                            <input fxFlex="50" type="number" name="#" formControlName="prixMin"  class="form-control form-control-custom" placeholder="Min">&nbsp;&nbsp;
+                                            <input fxFlex="50" type="number" name="#" formControlName="prixMax"  class="form-control form-control-custom" placeholder="Max">
+                                        </div>
+                                        </div>
+                                    </div>  
+                                      
+                                         
+                                      <div  *ngIf="selectedCategorie!='appartement' && selectedCategorie!='maison' && selectedCategorie!='terrain'"class="col-lg-2 col-md-6">
+                                          <label class="submit"></label>
+                                            <button type="submit" (click)="submitFilterVendre()" class="btn-first btn-submit full-width btn-height">Chercher</button>
+                                        </div> 
+
+                                        <div class="col-lg-8 col-md-8">
+                                            <div class="row" *ngIf="selectedCategorie!='appartement' && selectedCategorie!='maison' && selectedCategorie!='terrain'">
+                                                
+                                                    <div class="col-4" >
+                                                        <div class="form-group">
+                                                            <label class="fs-14 text-custom-black fw-500"></label>
+                                                            <div class="form-control ">
+                                                       
+                                                           <a (click)="getOptions()"   style="color:rgb(115, 144, 172);">Recherche avancée</a>
+                                                        </div> 
+                                                    </div> 
+                                                </div>   
+                                                <div class="col-4">
+                                                <div class="form-group">
+                                                    <label class="fs-14 text-custom-black fw-500"></label>
+                                                    <div class="form-control ">
+                                                    <i  class="fas fa-edit font-medium-3 mr-2 color " title="Modifier"></i>
+                                                   <a  onclick='window.open("http://localhost:4200/customizer")'  style="color:orangered">Dessiner sur la carte</a>
+                                                </div>  
+                                            </div>
+                                            </div>
+                                              </div>
+                                            </div>                 
+                                    </div>
+              <div class="row" *ngIf="selectedCategorie=='appartement' ||selectedCategorie=='maison'">
+                                      <div class="col-lg-8 col-md-8">
+                                          <div class="row">
+                                              <div class=" col-4">
+                                                  <div class="form-group">
+                                                      <label class="fs-14 text-custom-black fw-500">Superfecie</label>                                       
+                                                      <input type="number" name="#" formControlName="superfecie"  class="form-control form-control-custom" placeholder="Superfecie">                          
+                                                      </div>
+                                              </div>
+                                              <div class="col-4">
+                                                <div class="form-group">
+                                                <label class="fs-14 text-custom-black fw-500">Nombre de chambres</label>                                       
+                                                <select name="nbre_chambres"  id="nbre_chambres" (change)='onChangeChambre($event)'  formControlName="nbre_chambres"class="form-control form-control-custom" >
+                                                  <option selected disabled>nombre chambres</option>
+                                                <option *ngFor="let nbre_chambres of chambres"  [value]="nbre_chambres">{{nbre_chambres}}</option>      
+                                                </select>                            
+                                                </div>
+                                              </div>
+                                              <div class=" col-4">
+                                                  <div class="form-group">
+                                                      <label class="fs-14 text-custom-black fw-500">Nombre de salle bains</label>                                       
+                                                      <select name="pieces_salleBain"  id="pieces_salleBain" (change)='onChangeBain($event)' formControlName="pieces_salleBain"class="form-control form-control-custom" >
+                                                          <option disabled selected>salle de bains</option>
+                                                      <option *ngFor="let pieces_salleBain of bains"  [value]="pieces_salleBain">{{pieces_salleBain}}</option>      
+                                                      </select>                            
+                                                      </div>
+                                              </div>
+                                         
+                                          </div>
+                                      </div>
+                                 
+<!-- 
+                                      <div class="col-lg-4 col-md-6">
+                                          <div class="form-group">
+                                              <label class="fs-14 text-custom-black fw-500">Superfecie</label>
+                                              <input type="number" name="#" formControlName="prix"  class="form-control form-control-custom" placeholder="Taper votre recherche">
+                                          </div>
+                                      </div>  -->
+                                     
+                                       
+                                    </div>
+                                    <div class="row" *ngIf="selectedCategorie=='terrain' ">
+                                      <div class="col-lg-8 col-md-8">
+                                          <div class="row">
+                                              <div class=" col-4">
+                                                  <div class="form-group">
+                                                      <label class="fs-14 text-custom-black fw-500">Superfecie</label>                                       
+                                                      <input type="number" name="#" formControlName="superfecie"  class="form-control form-control-custom" placeholder="Superfecie">                          
+                                                      </div>
+                                              </div>
+                                              <div class="col-lg-3 col-md-6">
+                                                  <label class="submit"></label>
+                                                    <button  style="margin-right: 0%;"type="submit" (click)="submitFilterVendre()" class="btn-first btn-submit full-width btn-height">Chercher</button>
+                                                </div> 
+                                                <div class="col-lg-6 col-md-6
+                                                ">
+                                                  <!-- <i  class="fas fa-edit font-medium-3 mr-2 color " title="Modifier"></i> -->
+                                                  <label class="submit"></label>
+                                                  <button type="submit"  onclick='window.open("http://localhost:4200/customizer")'   style="width:200px;" class="btn-first btn-submit full-width btn-height">Dessiner sur la carte</button>
+                                     
+                                               </div>
+                                          </div>
+                                      </div>
+                                 
+<!-- 
+                                      <div class="col-lg-4 col-md-6">
+                                          <div class="form-group">
+                                              <label class="fs-14 text-custom-black fw-500">Superfecie</label>
+                                              <input type="number" name="#" formControlName="prix"  class="form-control form-control-custom" placeholder="Taper votre recherche">
+                                          </div>
+                                      </div>  -->
+                                     
+                                       
+                                    </div>
+                                    <div class="row" *ngIf="selectedCategorie=='appartement' ||selectedCategorie=='maison'">
+                                
+                                      <div  >
+                                          <label class="fs-14 text-custom-black fw-500">Commodités</label>
+                                          <div   id="outer">
+                                          <div  class="inner">
+                                          <input  type="checkbox"  value="climatisation" id="climatisation" name="climatisation" [(ngModel)]="climatisation" (change)="onChange(climatisation)" formControlName="climatisation"
+                                          [ngClass]="{ 'is-invalid': submitted && addFormControls.climatisation.errors }" required/>
+                                          &nbsp;<label class="form-check-label" for="climatisation">
+                                            Climatisation
+                                          </label>
+                                        </div>&nbsp; &nbsp; &nbsp;
+                                        <div  class="inner">
+                                          <input  type="checkbox" value="meuble" id="meuble" [(ngModel)]="meuble" (change)="onChange(meuble)" name="meuble" formControlName="meuble" checked   
+                                           [ngClass]="{ 'is-invalid': submitted && addFormControls.meuble.errors }" required/>
+                                           &nbsp;<label class="form-check-label" for="meuble">
+                                            Meuble
+                                          </label>
+                                          </div>&nbsp; &nbsp; &nbsp;
+                                          <div  class="inner">
+                                            <input  type="checkbox" value="ascenseur" id="ascenseur"  [(ngModel)]="ascenseur" (change)="onChange(ascenseur)" name="ascenseur" formControlName="ascenseur" 
+                                            [ngClass]="{ 'is-invalid': submitted && addFormControls.ascenseur.errors }" required/>
+                                            &nbsp;<label class="form-check-label" for="ascenseur">
+                                             Ascenseur
+                                            </label>
+                                            </div>&nbsp; &nbsp; &nbsp;
+                                            <div  class="inner">
+                                              <input  type="checkbox" value="jardin" id="jardin" [(ngModel)]="jardin" (change)="onChange(jardin)" name="jardin" formControlName="jardin"
+                                              [ngClass]="{ 'is-invalid': submitted && addFormControls.jardin.errors }" required/>
+                                              &nbsp;<label class="form-check-label" for="jardin">
+                                               Jardin
+                                              </label>
+                                              </div>
+                                          </div>
+                                          &nbsp; &nbsp;
+                                          <div   id="outer">
+                                            <div  class="inner">
+                                            <input  type="checkbox"  value="chauffage" id="chauffage" [(ngModel)]="chauffage" (change)="onChange(chauffage)" name="chauffage" formControlName="chauffage"
+                                            [ngClass]="{ 'is-invalid': submitted && addFormControls.chauffage.errors }" required/>
+                                            &nbsp;<label class="form-check-label" for="chauffage">
+                                              Chauffage centrale 
+                                            </label>
+                                          </div>&nbsp; &nbsp; &nbsp;
+                                          <div  class="inner">
+                                            <input  type="checkbox" value="cuisine" id="cuisine" [(ngModel)]="cuisine" (change)="onChange(cuisine)" name="cuisine" formControlName="cuisine" 
+                                            [ngClass]="{ 'is-invalid': submitted && addFormControls.cuisine.errors }" required/>
+                                            &nbsp;<label class="form-check-label" for="cuisine">
+                                              Cuisine equipé
+                                            </label>
+                                            </div>&nbsp; &nbsp; &nbsp;
+                                            <div  class="inner">
+                                              <input  type="checkbox" value="parking" id="parking" [(ngModel)]="parking" (change)="onChange(parking)" name="parking" formControlName="parking" checked
+                                              [ngClass]="{ 'is-invalid': submitted && addFormControls.parking.errors }" required/>
+                                              &nbsp;<label class="form-check-label" for="parking">
+                                               Parking
+                                              </label>
+                                              </div>&nbsp; &nbsp; &nbsp;
+                                         
+                                            </div>
+                                        </div>
+                                      
+                                        <div class="col-lg-5 col-md-6">
+                                            <!--   <label class="submit"></label>
+                                                <button  style="margin-right: 0%;"type="submit" (click)="submitFilterLouer()" class="btn-first btn-submit full-width btn-height">Chercher</button> -->
+                                            </div> 
+    
+                                            <div class="col-lg-5 col-md-10
+                                            ">
+                                            <label class="submit"></label>
+                                            <button  style="margin-right: 0%;"type="submit" (click)="submitFilterLouer()" class="btn-first btn-submit full-width btn-height">Chercher</button> 
+                                           </div>
+    
+                                           <div class="col-lg-6 col-md-10
+                                           ">
+                                             <!-- <i  class="fas fa-edit font-medium-3 mr-2 color " title="Modifier"></i> -->
+                                             <label class="submit"></label>
+                                             <button type="submit"  onclick='window.open("http://localhost:4200/customizer")'   style="width:200px;" class="btn-first btn-submit full-width btn-height">Dessiner sur la carte</button>
+                                
+                                          </div>
+                                    </div>
+                                  
+                                </form>
+                            </div>
+                          
+                            </div>
+                    <!--         <div class="tab-pane" id="cars">
+                                <div class="tab-inner">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-6">
+                                                <div class="form-group">
+                                                    <label class="fs-14 text-custom-black fw-500">Pick Up</label>
+                                                    <input type="text" name="#" class="form-control form-control-custom" placeholder="city, distirct or specific airpot">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="fs-14 text-custom-black fw-500">Drop Off</label>
+                                                    <input type="text" name="#" class="form-control form-control-custom" placeholder="city, distirct or specific airpot">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                      <div class="form-group">
+                                                          <label class="fs-14 text-custom-black fw-500">Région</label>
+                                                          <div class="group-form">
+                                                            <select class=" form-control form-control-custom">
+                                                                <option>Tunis</option>
+                                                                <option>Sousse</option>
+                                                               
+                                                            </select>
+                                                          </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label class="submit"></label>
+                                                            <div class="group-form">
+                                                              <select class="custom-select form-control form-control-custom">
+                                                                  <option>Anytime</option>
+                                                                  <option>Morning</option>
+                                                              </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                      <div class="form-group">
+                                                          <label class="fs-14 text-custom-black fw-500">Catégorie</label>
+                                                          <div class="group-form">
+                                                            <select class=" form-control form-control-custom">
+                                                                <option>Appartement</option>
+                                                                <option>Maison</option>
+                                                                <option>Terrain</option>
+                                                            </select>
+                                                          </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label class="submit"></label>
+                                                            <div class="group-form">
+                                                              <select class="custom-select form-control form-control-custom">
+                                                                  <option>Anytime</option>
+                                                                  <option>Morning</option>
+                                                              </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-12">
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        <div class="form-group">
+                                                            <label class="fs-14 text-custom-black fw-500">Adults</label>
+                                                            <div class="group-form">
+                                                              <select class="custom-select form-control form-control-custom">
+                                                                  <option>01</option>
+                                                                  <option>02</option>
+                                                             
+                                                              </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <div class="form-group">
+                                                            <label class="fs-14 text-custom-black fw-500">Kids</label>
+                                                            <div class="group-form">
+                                                              <select class="custom-select form-control form-control-custom">
+                                                                  <option>01</option>
+                                                                  <option>02</option>
+                                                                 
+                                                              </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                      <div class="form-group">
+                                                          <label class="fs-14 text-custom-black fw-500">Promocode</label>
+                                                          <input type="text" name="#" class="form-control form-control-custom" placeholder="type here">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label class="fs-14 text-custom-black fw-500">Car Type</label>
+                                                            <div class="group-form">
+                                                              <select class="custom-select form-control form-control-custom">
+                                                                  <option>Economy</option>
+                                                                  <option>Compact</option>
+                                                              </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label class="submit"></label>
+                                                            <button class="btn-first btn-submit full-width btn-height">Search</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+
+    <!-- End Banner tabs -->
+    <!-- Start About Us -->
+  <!--   <section class="section-padding about-us">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 align-self-center">
+                    <div class="about-left-side mb-md-80">
+                        <div class="section-header">
+                            <div class="section-heading">
+                                <h3 class="text-custom-black">A propos de nous</h3>
+                                <div class="section-description">
+                                 <p class="text-light-dark">Vous souhaitez acheter pour habiter ou pour investir, un logement neuf vous permet de bénéficier d’un frais d’enregistrement préférentiel . Un achat dans le neuf vous assure également plus de souplesse sur l’établissement du plan de votre futur logement et un bâtiment aux dernières normes de qualité et tendances design. Découvrez nos offres de logements neufs avec des programmes partout en Tunisie..</p>
+                                </div>
+                            </div>
+                        </div>
+                       
+                
+                        <a href="about.html" class="btn-first btn-submit">Lire plus</a>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6">
+                    <div class="about-right-side full-height">
+                        <div class="about-img full-height">
+                            <img src="assets/assets/images/about-2.jpg" class="img-fluid image-fit" alt="img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+  
+
+   <!--    <section id="header-footer"  *ngIf="changeSubmit==false&&favori==true">
+     
+      
+        <h3 class="text-custom-black  textc"> Annonces favoris</h3>
+<div class="row text-left" matchHeight="card"  >
+
+      <div style="    margin-right: 100px;" class="col-lg-3 col-md-6" *ngFor="let favori of favannonces" >
+        <div class="card"  *ngIf="favori.annonce" style="width: 25rem;     margin-right: 100px;" >
+         
+           
+                    <img class="card-img-top service-img animate-img" src="http://localhost:3000/annonce/getFile/{{
+                        favori.annonce?.fileimages[0]
+                      }}" alt="Card image cap">
+            
+                
+
+          <div class="card-content " >
+            <div class="hotel-grid service-box p-relative mb-xl-30"  >
+                <div class="hotel-grid-wrapper bx-wrapper " >
+              
+                    <div class="hotel-grid-caption padding-20 bg-custom-white p-relative">
+                        <h4 class="title fs-16"><a href="hotel-detail.html" class="text-custom-black">{{favori.annonce.titre}}<small class="text-light-dark">{{favori.annonce.addresse.ville}}</small></a></h4>
+                        <span class="price"><small></small>{{favori.annonce.prix}} TND</span>
+                        <div class="action">
+                            <a class="btn-first btn-small" routerLink="/details-annonces/{{favori.annonce._id }}">Détails</a>&nbsp;&nbsp;&nbsp;
+                            <a class="btn-first btn-submit " href="#">Réserver</a>  
+           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+          </div>
+  
+        </div>
+      </div>
+  
+      
+</div> 
+
+  </section> -->
+
+<!-- <app-favoris  id="header-footer" *ngIf="changeSubmit==false&&favori==true"></app-favoris> -->
+<section id="header-footer" >
+     
+    <div *ngIf="alertAddFav==true " class="alert alert-success" role="alert">
+        Cette annonce a été ajouté au Favoris avec succés !
+      </div>
+      <div *ngIf="alertDeleteFav==true " class="alert alert-danger wdt" role="alert">
+        Cette annonce a été supprimé du Favoris avec succés !
+      </div>
+    <h3 class="text-custom-black  textc" *ngIf="changeSubmit==false"> Annonces favoris</h3>
+<div class="row text-left" matchHeight="card"  >
+
+  <div style="    margin-right: 70px;" class="col-lg-3 col-md-6" *ngFor="let favori of favannonces" >
+    <div class="card"  *ngIf="favori.annonce" style="width: 23rem;     margin-right: 100px;" >
+     
+       
+                <img class="card-img-top service-img animate-img" src="http://localhost:3000/annonce/getFile/{{
+                    favori.annonce?.fileimages[0]
+                  }}" alt="Card image cap">
+        
+            
+
+      <div class="card-content " >
+        <div class="hotel-grid service-box p-relative mb-xl-30"  >
+            <div class="hotel-grid-wrapper bx-wrapper " >
+          
+                <div class="hotel-grid-caption padding-20 bg-custom-white p-relative">
+                    <h4 class="title fs-16"><a href="hotel-detail.html" class="text-custom-black">{{favori.annonce.titre}}<small class="text-light-dark">{{favori.annonce.addresse.ville}}</small></a></h4>
+                    <span class="price"><small></small>{{favori.annonce.prix}} TND</span>
+                    <div class="action">
+                        <a class="btn-first btn-small"  (click)="openDetails(favori.annonce._id)">Détails</a>&nbsp;&nbsp;&nbsp;
+                        <a class="btn-first btn-submit "  (click)="openDetails(favori.annonce._id)">Réserver</a>   
+                         <a (click)='deleteFavoris(favori._id)' class="danger p-0" data-original-title="" title="">
+                            <i   class="fas fa-trash-alt font-medium-3 mr-2 IconToDeleteDemande" title="Supprimer du favoris"> </i>
+                          
+                          </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+      </div>
+
+    </div>
+  </div>
+
+  
+</div> 
+
+</section>
+
+<section *ngIf="changeSubmit==true" class="section-padding our-services-sec bg-light-white">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-heading">
+                    <h3 class="text-custom-black">Annonces selon filtre</h3>
+                    <div class="section-description">
+                    </div>
+                </div>
+
+  
+            
+            </div>
+      <div class="row-lg-3"  >
+          <div fxLayout="row" fxLayoutAlign="center" >
+    
+      <div  fxFlex  class="col-lg-8">
+            <div *ngFor="let annonce of filteredAnnonce">
+                    <div class="service-box p-relative mb-xl-30">
+                        <div class="service-wrapper bg-custom-white bx-wrapper">
+                            <div class="service-img animate-img">
+                                <a routerLink="/details-annonces/{{annonce._id }}">
+                                    <img src="http://localhost:3000/annonce/getFile/{{
+                                        annonce?.fileimages[0]
+                                      }}" class="image-fit" alt="img">
+                                </a>
+                            </div>
+                            <div class="service-text padding-15">
+                              <div fxLayout="row" fxLayoutAlign="center"> <div fxFlex><h5><a href="#" class="text-custom-black">{{annonce.titre}}</a></h5>  </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <div fxFlex><a class=" btn-submit " *ngIf="favori==false" (click)='AjouterFavoris(annonce._id)'title="Ajouter aux favoris">  <img src="../../../assets/assets/images/hearttt.png" *ngIf="favori==true"class="imgT" ></a>        
+                            </div>    </div>                         
+                                <span class="pricee"><small></small>{{annonce.prix}} TND</span>
+                                <p class="text-light-dark">{{annonce.description}}/p>
+                                <div class="action">
+                                <a  (click)="openDetails(annonce._id)" class="btn-first btn-small btn-height ">Détails</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a class="btn-first btn-submit  btn-height"  (click)="openDetails(annonce._id)">Réserver</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+          
+                        
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+      
+       
+        </div>
+     
+        <div fxFlex class="col-lg-4">
+            <div >
+                <div class="section-btn mb-xl-20 cont">
+              
+                    <img src="../../../assets/assets/images/maap.png"  style="margin-left:0px;height:auto;" class=" partner-box bx-wrapper  animate-img width" >
+                    <button   (click)="open()" type ="button" class="classic_button_prev btn-large" >{{nombreAnnonces}} biens à voir sur la carte</button>
+               
+                </div>
+            </div>
+      
+        </div>
+    </div>
+           </div>
+   
+             
+      
+  
+                
+          </div> 
+     
+    </section> 
+
+
+ <app-footer></app-footer>
+    <!-- End Copyright -->
+    <div id="back-top" class="back-top">
+      <a href="#top"><i class="flaticon-arrows"></i></a>
+    </div>
+    <!-- Place all Scripts Here -->
+    <!-- jQuery -->
+    <ng-template #modalContent let-close="close">
+        <div class="modal-header">
+            <h5 class="modal-title">{{ modalData?.action }}</h5>
+            <button type="button" class="close" (click)="close()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+               <div >  
+                 <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+              
+                   <agm-marker  *ngFor="let annonce of filteredAnnonce" [latitude]="annonce.latitude" [longitude]="annonce.longitude"  >
+                   </agm-marker> 
+       
+                </agm-map>
+            
+             </div>
+             
+        </div>
+    
+    </ng-template>
+    <div > 
+    
+
+    </div>
+
+    <!-- /Place all Scripts Here -->
+</body>
+
+<!-- Mirrored from codezion.com/themes/tm/html/toura/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 17 Mar 2021 14:50:06 GMT -->
+</html>

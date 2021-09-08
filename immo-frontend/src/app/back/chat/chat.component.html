@@ -1,0 +1,60 @@
+<!-- <div class="chat-messages">
+  <div class="chat-messages-show-container">
+    <ul class="chat-messages-show-list " id="message-list">
+    </ul>
+  </div>
+
+  <section class="chat-app-form bg-blue-grey bg-lighten-5">
+    <form class="chat-app-input row mt-2">
+      <fieldset class="form-group position-relative has-icon-left col-lg-10 col-8 m-0 px-3">
+        <div class="form-control-position">
+        </div>
+        <input type="text" class="form-control" id="iconLeft4" placeholder="Type your message"  (keydown.enter)="SendMessage();$event.preventDefault()"
+        #messageInput>
+        <div class="form-control-position control-position-right">
+          <i class="ft-image mr-1"></i>
+        </div>
+      </fieldset>
+      <fieldset class="form-group position-relative has-icon-left col-lg-2 col-4 m-0">
+        <button type="button" class="btn-first btn-submit full-width btn-height" (click)="SendMessage()">
+          <i class="fa fa-paper-plane-o d-block d-xl-inline-block d-lg-none p-0"></i>
+          <span class="d-none d-lg-inline-block ml-1">Send</span>
+        </button>
+      </fieldset>
+    </form>
+  </section>
+</div> -->
+
+
+
+<div class="chat-messages">
+  <div class="chat-messages-show-container">
+    <ul class="chat-messages-show-list " id="message-list">
+    </ul>
+  </div>
+ <!--  <div class="chat-messages-create-container"> 
+    <input class="chat-messages-create-input" type="text"  [(ngModel)]="message">
+    <button  class="chat-messages-create-button" (click)="SendMessage()"> Send </button>
+  </div> -->
+  <section class="chat-app-form bg-blue-grey bg-lighten-5">
+    <form class="chat-app-input row mt-2">
+      <fieldset class="form-group position-relative has-icon-left col-lg-10 col-8 m-0 px-3">
+        <div class="form-control-position">
+        <!--   <i class="icon-emoticon-smile"></i> -->
+        </div>
+        <input type="text" class="form-control" id="iconLeft4" placeholder="Type your message"  (keydown.enter)="SendMessage();$event.preventDefault()"
+        #messageInput>
+        <div class="form-control-position control-position-right">
+          <i class="ft-image mr-1"></i>
+        </div>
+      </fieldset>
+      <fieldset class="form-group position-relative has-icon-left col-lg-2 col-4 m-0">
+        <button type="button" class="btn-first btn-submit full-width btn-height" (click)="SendMessage()">
+          <i class="fa fa-paper-plane-o d-block d-xl-inline-block d-lg-none p-0"></i>
+          <span class="d-none d-lg-inline-block ml-1">Send</span>
+        </button>
+      </fieldset>
+    </form>
+  </section>
+</div>
+

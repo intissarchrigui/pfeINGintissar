@@ -1,0 +1,456 @@
+<app-header></app-header>
+
+<div class="subheader normal-bg section-padding" >
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+            
+                <ul class="custom-flex">
+                    <li class="fw-500">
+                        <a href="index.html" class="text-custom-white">Annonces</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="section-padding bg-light-white">
+    <div class="container">
+        <div class="row">
+        
+            <aside class="col-lg-4">
+                <div class="sidebar_wrap mb-md-80">
+                    <div class="sidebar" *ngIf="choix===''">
+                        <div class="sidebar_widgets mb-xl-30">
+                     
+
+                            <div class="widget_title bg-custom-blue">
+                                <h5 class="no-margin text-custom-white">Modifier votre recherche</h5>
+                            </div>
+                          
+                            <div >
+                                <div> <button class="btn-first btn-submit" style="margin:8px;width:250px"(click)="louer()">à louer</button></div> 
+                                <div> <button class="btn-first btn-submit"style="margin:8px; margin-bottom:30px;width:250px" (click)="vendre()">à vendre</button></div> 
+                                  </div>
+             
+                   
+                    </div>
+                </div>
+            </div>
+                      <div *ngIf="choix==='louer'">
+                <form [formGroup]="filtreFormLouer">
+                <div class="sidebar_wrap mb-md-80">
+                    <div class="sidebar">
+                        <div class="sidebar_widgets mb-xl-30">
+                     
+
+                            <div class="widget_title bg-custom-blue">
+                                <h5 class="no-margin text-custom-white">Modifier votre recherche</h5>
+                            </div>
+                          
+                
+                              <div class="form-group">
+                                    <label class="fs-14 text-custom-black fw-500">Catégorie</label>
+                                   <select name="categorie"  id="categorie" (change)='onChangeCategorie($event)' formControlName="categorie"class="form-control form-control-custom" >
+                               <option selected="true" disabled="disabled">Catégorie</option>
+                               <option *ngFor="let categorie of categories"  [value]="categorie">{{categorie}}</option>
+                             </select>
+                                </div> 
+                                <div class="form-group">
+                                    <label class="fs-14 text-custom-black fw-500">Régions</label>
+                                    <div class="input-group group-form">
+                                        <select class='form-control form-control-custom'  style="display: inline-block;" placeholder="Ville" id="ville" name="ap"  formControlName="addresse" required [(ngModel)]="villa" >
+                                            <option [ngValue]="null" [disabled]="true" >Région</option>
+                                            <option *ngFor="let method of Villes"  [value]="method.nom ">{{ method.nom }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="fs-14 text-custom-black fw-500">Nombre de chambres</label>                                       
+                                    <select name="nbre_chambres"  id="nbre_chambres" (change)='onChangeChambre($event)'  formControlName="nbre_chambres"class="form-control form-control-custom" >
+                                      <option selected disabled>nombre chambres</option>
+                                    <option *ngFor="let nbre_chambres of chambres"  [value]="nbre_chambres">{{nbre_chambres}}</option>      
+                                    </select>                            
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="fs-14 text-custom-black fw-500">Nombre de salle bains</label>                                       
+                                        <select name="pieces_salleBain"  id="pieces_salleBain" (change)='onChangeBain($event)' formControlName="pieces_salleBain"class="form-control form-control-custom" >
+                                            <option disabled selected>salle de bains</option>
+                                        <option *ngFor="let pieces_salleBain of bains"  [value]="pieces_salleBain">{{pieces_salleBain}}</option>      
+                                        </select>                            
+                                        </div>
+                  
+                        </div>
+                        <div class="sidebar_widgets mb-xl-30">
+                            <div class="widget_title bg-custom-blue">
+                                <h5 class="no-margin text-custom-white">Prix </h5>
+                            </div>
+                            <div fxLayout="row">
+                             
+                                <input fxFlex="50" type="number" name="#" formControlName="prixMin"  class="form-control form-control-custom" placeholder="Min">&nbsp;&nbsp;
+                                <input fxFlex="50" type="number" name="#" formControlName="prixMax"  class="form-control form-control-custom" placeholder="Max">
+                            </div>
+                
+                        </div>
+                        <div class="sidebar_widgets mb-xl-30">
+                            <div class="widget_title bg-custom-blue">
+                                <h5 class="no-margin text-custom-white">Superfecie </h5>
+                            </div>
+                            <div >
+                           
+                                <input type="number" name="#" formControlName="superfecie"  class="form-control form-control-custom" placeholder="Superfecie">
+
+                            </div>
+                
+                        </div>
+                        <div class="sidebar_widgets mb-xl-30">
+                            <div class="widget_title bg-custom-blue">
+                                <h5 class="no-margin text-custom-white">Commodités</h5>
+                            </div>
+
+                                <div class="form-group">
+                                    <label class="custom-checkbox">
+                                        <input  type="checkbox" value="meuble" id="meuble" [(ngModel)]="meuble" (change)="onChange(meuble)" name="meuble" formControlName="meuble" checked   
+                                        [ngClass]="{ 'is-invalid': submitted && addFormControls.meuble.errors }" required/>
+                                        <span class="checkmark"></span> 
+                                        Meubles
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="custom-checkbox">
+                                        <input  type="checkbox" value="cuisine" id="cuisine" [(ngModel)]="cuisine" (change)="onChange(cuisine)" name="cuisine" formControlName="cuisine" 
+                                        [ngClass]="{ 'is-invalid': submitted && addFormControls.cuisine.errors }" required/>
+                                        <span class="checkmark"></span> 
+                                        Cuisine équipé
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="custom-checkbox">
+                                        <input  type="checkbox" value="ascenseur" id="ascenseur"  [(ngModel)]="ascenseur" (change)="onChange(ascenseur)" name="ascenseur" formControlName="ascenseur" 
+                                        [ngClass]="{ 'is-invalid': submitted && addFormControls.ascenseur.errors }" required/> 
+                                        <span class="checkmark"></span> 
+                                        Ascenseur
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="custom-checkbox">
+                                        <input  type="checkbox"  value="chauffage" id="chauffage" [(ngModel)]="chauffage" (change)="onChange(chauffage)" name="chauffage" formControlName="chauffage"
+                                        [ngClass]="{ 'is-invalid': submitted && addFormControls.chauffage.errors }" required/>
+                                        <span class="checkmark"></span> 
+                                        Chauffage Centrale
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="custom-checkbox">
+                                        <input  type="checkbox"  value="climatisation" id="climatisation" name="climatisation" [(ngModel)]="climatisation" (change)="onChange(climatisation)" formControlName="climatisation"
+                                        [ngClass]="{ 'is-invalid': submitted && addFormControls.climatisation.errors }" required/>
+                                        <span class="checkmark"></span> 
+                                      Climatisation
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="custom-checkbox">
+                                        <input  type="checkbox" value="jardin" id="jardin" [(ngModel)]="jardin" (change)="onChange(jardin)" name="jardin" formControlName="jardin"
+                                                       [ngClass]="{ 'is-invalid': submitted && addFormControls.jardin.errors }" required/> 
+                                        <span class="checkmark"></span> 
+                                       Jardin
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="custom-checkbox">
+                                        <input  type="checkbox" value="parking" id="parking" [(ngModel)]="parking" (change)="onChange(parking)" name="parking" formControlName="parking" checked
+                                                       [ngClass]="{ 'is-invalid': submitted && addFormControls.parking.errors }" required/>
+                                        <span class="checkmark"></span> 
+                                       Parking
+                                    </label>
+                                </div>
+                                <button type="submit" (click)="submitFilterLouer()" class="btn-first btn-submit full-width btn-height">Rechercher</button>
+                          
+                        </div>
+                   
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div *ngIf="choix==='vendre'">
+            <form [formGroup]="filtreFormVendre">
+            <div class="sidebar_wrap mb-md-80">
+                <div class="sidebar">
+                    <div class="sidebar_widgets mb-xl-30">
+                 
+
+                        <div class="widget_title bg-custom-blue">
+                            <h5 class="no-margin text-custom-white">Modifier votre recherche</h5>
+                        </div>
+                      
+            
+                          <div class="form-group">
+                                <label class="fs-14 text-custom-black fw-500">Catégorie</label>
+                               <select name="categorie"  id="categorie" (change)='onChangeCategorie($event)' formControlName="categorie"class="form-control form-control-custom" >
+                           <option selected="true" disabled="disabled">Catégorie</option>
+                           <option *ngFor="let categorie of categories"  [value]="categorie">{{categorie}}</option>
+                         </select>
+                            </div> 
+                            <div class="form-group">
+                                <label class="fs-14 text-custom-black fw-500">Régions</label>
+                                <div class="input-group group-form">
+                                    <select class='form-control form-control-custom'  style="display: inline-block;" placeholder="Ville" id="ville" name="ap"  formControlName="addresse" required [(ngModel)]="villa" >
+                                        <option [ngValue]="null" [disabled]="true" >Région</option>
+                                        <option *ngFor="let method of Villes"  [value]="method.nom ">{{ method.nom }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="fs-14 text-custom-black fw-500">Nombre de chambres</label>                                       
+                                <select name="nbre_chambres"  id="nbre_chambres" (change)='onChangeChambre($event)'  formControlName="nbre_chambres"class="form-control form-control-custom" >
+                                  <option selected disabled>nombre chambres</option>
+                                <option *ngFor="let nbre_chambres of chambres"  [value]="nbre_chambres">{{nbre_chambres}}</option>      
+                                </select>                            
+                                </div>
+                                <div class="form-group">
+                                    <label class="fs-14 text-custom-black fw-500">Nombre de salle bains</label>                                       
+                                    <select name="pieces_salleBain"  id="pieces_salleBain" (change)='onChangeBain($event)' formControlName="pieces_salleBain"class="form-control form-control-custom" >
+                                        <option disabled selected>salle de bains</option>
+                                    <option *ngFor="let pieces_salleBain of bains"  [value]="pieces_salleBain">{{pieces_salleBain}}</option>      
+                                    </select>                            
+                                    </div>
+              
+                    </div>
+                    <div class="sidebar_widgets mb-xl-30">
+                        <div class="widget_title bg-custom-blue">
+                            <h5 class="no-margin text-custom-white">Prix </h5>
+                        </div>
+                        <div fxLayout="row">
+                         
+                            <input fxFlex="50" type="number" name="#" formControlName="prixMin"  class="form-control form-control-custom" placeholder="Min">&nbsp;&nbsp;
+                            <input fxFlex="50" type="number" name="#" formControlName="prixMax"  class="form-control form-control-custom" placeholder="Max">
+                        </div>
+            
+                    </div>
+                    <div class="sidebar_widgets mb-xl-30">
+                        <div class="widget_title bg-custom-blue">
+                            <h5 class="no-margin text-custom-white">Superfecie </h5>
+                        </div>
+                        <div >
+                       
+                            <input type="number" name="#" formControlName="superfecie"  class="form-control form-control-custom" placeholder="Superfecie">
+
+                        </div>
+            
+                    </div>
+                    <div class="sidebar_widgets mb-xl-30">
+                        <div class="widget_title bg-custom-blue">
+                            <h5 class="no-margin text-custom-white">Commodités</h5>
+                        </div>
+
+                            <div class="form-group">
+                                <label class="custom-checkbox">
+                                    <input  type="checkbox" value="meuble" id="meuble" [(ngModel)]="meuble" (change)="onChange(meuble)" name="meuble" formControlName="meuble" checked   
+                                    [ngClass]="{ 'is-invalid': submitted && addFormControls.meuble.errors }" required/>
+                                    <span class="checkmark"></span> 
+                                    Meubles
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="custom-checkbox">
+                                    <input  type="checkbox" value="cuisine" id="cuisine" [(ngModel)]="cuisine" (change)="onChange(cuisine)" name="cuisine" formControlName="cuisine" 
+                                    [ngClass]="{ 'is-invalid': submitted && addFormControls.cuisine.errors }" required/>
+                                    <span class="checkmark"></span> 
+                                    Cuisine équipé
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="custom-checkbox">
+                                    <input  type="checkbox" value="ascenseur" id="ascenseur"  [(ngModel)]="ascenseur" (change)="onChange(ascenseur)" name="ascenseur" formControlName="ascenseur" 
+                                    [ngClass]="{ 'is-invalid': submitted && addFormControls.ascenseur.errors }" required/> 
+                                    <span class="checkmark"></span> 
+                                    Ascenseur
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="custom-checkbox">
+                                    <input  type="checkbox"  value="chauffage" id="chauffage" [(ngModel)]="chauffage" (change)="onChange(chauffage)" name="chauffage" formControlName="chauffage"
+                                    [ngClass]="{ 'is-invalid': submitted && addFormControls.chauffage.errors }" required/>
+                                    <span class="checkmark"></span> 
+                                    Chauffage Centrale
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="custom-checkbox">
+                                    <input  type="checkbox"  value="climatisation" id="climatisation" name="climatisation" [(ngModel)]="climatisation" (change)="onChange(climatisation)" formControlName="climatisation"
+                                    [ngClass]="{ 'is-invalid': submitted && addFormControls.climatisation.errors }" required/>
+                                    <span class="checkmark"></span> 
+                                  Climatisation
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="custom-checkbox">
+                                    <input  type="checkbox" value="jardin" id="jardin" [(ngModel)]="jardin" (change)="onChange(jardin)" name="jardin" formControlName="jardin"
+                                                   [ngClass]="{ 'is-invalid': submitted && addFormControls.jardin.errors }" required/> 
+                                    <span class="checkmark"></span> 
+                                   Jardin
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="custom-checkbox">
+                                    <input  type="checkbox" value="parking" id="parking" [(ngModel)]="parking" (change)="onChange(parking)" name="parking" formControlName="parking" checked
+                                                   [ngClass]="{ 'is-invalid': submitted && addFormControls.parking.errors }" required/>
+                                    <span class="checkmark"></span> 
+                                   Parking
+                                </label>
+                            </div>
+                            <button type="submit" (click)="submitFilterVendre()" class="btn-first btn-submit full-width btn-height">Rechercher</button>
+                      
+                    </div>
+               
+                </div>
+            </div>
+        </form>
+    </div>
+            </aside>
+         
+            <div class="col-lg-8 " *ngIf="changeSubmit==false">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="listing-top-heading mb-xl-20">
+                            <h6 class="no-margin text-custom-black">Annonces à la une </h6>
+                     <!--        <div class="sort-by">
+                                <span class="text-custom-black fs-14 fw-600">Sort by</span>
+                                <div class="group-form">
+                                    <select class="form-control form-control-custom custom-select">
+                                        <option>A to Z</option>
+                                        <option>Z to A</option>
+                                    </select>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="row text-left" matchHeight="card"   *ngIf="changeSubmit==false" >
+    
+                        <div style="margin-right: 130px;" class="col-lg-5 col-md-6"*ngFor="let annonce of annonces" >
+                          <div class="card"  style="width: 40rem;     margin-right: 90px;" >
+                           
+                             
+                                      <img class="card-img-top service-img animate-img" src="http://localhost:3000/annonce/getFile/{{
+                                          annonce?.fileimages[0]
+                                        }}" alt="Card image cap">
+                              
+                                  
+                
+                            <div class="card-content " >
+                              <div class="hotel-grid service-box p-relative mb-xl-30"  >
+                                  <div class="hotel-grid-wrapper bx-wrapper " >
+                                
+                                      <div class="hotel-grid-caption padding-20 bg-custom-white p-relative">
+                                          <h4 class="title fs-16"><a href="hotel-detail.html" class="text-custom-black">{{annonce.titre}}<small class="text-light-dark">{{annonce.addresse.ville}}</small></a></h4>
+                                          <span class="price"><small></small>{{annonce.prix}} TND</span>
+                                          <div class="action">
+                                              <a class="btn-first btn-small"   (click)="openDetails(annonce._id)">Détails</a>&nbsp;&nbsp;&nbsp;
+                                              <a class="btn-first btn-submit " (click)="openDetails(annonce._id)">Réserver</a>   &nbsp;&nbsp;&nbsp;
+                                           <a (click)='deleteFavoris(annonce._id)'*ngIf="annonce.favori==true"> <img src="../../../assets/assets/images/hearttt.png" class="imgT"  ></a> 
+                                         <a (click)='AjouterFavoris(annonce._id)' *ngIf="annonce.favori==false"> <img src="../../../assets/assets/images/heart.png" class="imgT" title="Ajouter aux favoris" ></a> 
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          
+                            </div>
+                    
+                          </div>
+                        </div>
+              
+                        
+                  </div> 
+
+                  
+             
+           
+
+                </div>
+                <div class="row">
+                    <div class="col-12">
+         
+                        <div style="float: right">
+                            <pagination-controls (pageChange)="pgn = $event"></pagination-controls>
+                          </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8 " *ngIf="changeSubmit==true">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="listing-top-heading mb-xl-20">
+                            <h6 class="no-margin text-custom-black">{{nombreAnnonces}} annonces trouvées</h6>
+                     <!--        <div class="sort-by">
+                                <span class="text-custom-black fs-14 fw-600">Sort by</span>
+                                <div class="group-form">
+                                    <select class="form-control form-control-custom custom-select">
+                                        <option>A to Z</option>
+                                        <option>Z to A</option>
+                                    </select>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="row text-left" matchHeight="card"   *ngIf="changeSubmit==true" >
+    
+                        <div style="margin-right: 130px;" class="col-lg-5 col-md-6"*ngFor="let annonce of filteredAnnonce" >
+                          <div class="card"  style="width: 40rem;     margin-right: 90px;" >
+                           
+                             
+                                      <img class="card-img-top service-img animate-img" src="http://localhost:3000/annonce/getFile/{{
+                                          annonce?.fileimages[0]
+                                        }}" alt="Card image cap">
+                              
+                                  
+                
+                            <div class="card-content " >
+                              <div class="hotel-grid service-box p-relative mb-xl-30"  >
+                                  <div class="hotel-grid-wrapper bx-wrapper " >
+                                
+                                      <div class="hotel-grid-caption padding-20 bg-custom-white p-relative">
+                                          <h4 class="title fs-16"><a href="hotel-detail.html" class="text-custom-black">{{annonce.titre}}<small class="text-light-dark">{{annonce.addresse.ville}}</small></a></h4>
+                                          <span class="price"><small></small>{{annonce.prix}} TND</span>
+                                          <div class="action">
+                                              <a class="btn-first btn-small"   (click)="openDetails(annonce._id)">Détails</a>&nbsp;&nbsp;&nbsp;
+                                              <a class="btn-first btn-submit " (click)="openDetails(annonce._id)">Réserver</a>   &nbsp;&nbsp;&nbsp;
+                                           <a (click)='deleteFavoris(annonce._id)'*ngIf="annonce.favori==true"> <img src="../../../assets/assets/images/hearttt.png" class="imgT"  ></a> 
+                                         <a (click)='AjouterFavoris(annonce._id)' *ngIf="annonce.favori==false"> <img src="../../../assets/assets/images/heart.png" class="imgT" title="Ajouter aux favoris" ></a> 
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          
+                            </div>
+                    
+                          </div>
+                        </div>
+              
+                        
+                  </div> 
+
+                  
+             
+           
+
+                </div>
+                <div class="row">
+                    <div class="col-12">
+         
+                        <div style="float: right">
+                            <pagination-controls (pageChange)="pgn = $event"></pagination-controls>
+                          </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</section>
+
+
+
+<app-footer></app-footer>
+

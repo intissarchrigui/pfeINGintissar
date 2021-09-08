@@ -1,0 +1,454 @@
+
+
+
+<!--Registration Page Starts-->
+<section id="regestration">
+ 
+    
+  
+  <!-- Step 3: Toggle the value of the property when the toggler button is clicked. -->
+  
+
+  <!-- Step 2: Add the ngbCollapse directive to the element below. -->
+
+
+<div class="container-fluid">
+  
+  <div class="row full-height-vh m-0">
+    <br>
+    <!-- <img src="../../../assets/img/blueprint restaurant.png" width="150px" height="80px"> -->
+    <div class="col-12 d-flex align-items-center justify-content-center">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body register-img">
+            <div class="row m-0">
+              <div class="col-lg-3 d-none d-lg-block py-2 px-3 text-center">
+        
+                <img
+                  src="../../assets/img/gallery/register.png"
+                  alt=""
+                  class="img-fluid mt-3 pl-3"
+                  width="400"
+                  height="230"
+                />
+              </div>
+              <div class="col-lg-9 col-md-12 pt-3 px-4 bg-white">
+                <div class="fg-actions d-flex justify-content-between">
+                  <div class="recover-pass">
+                  
+                  </div>
+                  <div class="login-btn">
+                    <button class="btn btn-outline-primary">
+                      <a
+                        [routerLink]="['/login']"
+                        class="text-decoration-none"
+                        >J'ai déja un compte</a
+                      >
+                    </button>
+                  </div>
+                
+                </div>
+                <h4 class="card-title mb-2">Inscription </h4>
+                <p class="card-text mb-3">
+                  Choisir votre statut
+                </p>
+                <div *ngIf="choix===''">
+                  <div> <button class="btn-first btn-submit" style="margin:8px;width:250px"(click)="profesional()">profesionnel</button></div> 
+                  <div> <button class="btn-first btn-submit"style="margin:8px; margin-bottom:30px;width:250px" (click)="client()">Client</button></div> 
+                    </div>
+ 
+                <mat-vertical-stepper *ngIf="choix==='profesionnel'"  [linear]="isLinear"  #stepper>
+                  <mat-step [stepControl]="firstFormGroup">
+                    <form [formGroup]="firstFormGroup">
+                      <ng-template matStepLabel>Info compte</ng-template>
+                      <div class="row">
+                        <div class="col-md-3">
+                          <mat-form-field>
+                            <mat-label>Nom</mat-label>
+                            <input matInput placeholder="Nom" [ngModelOptions]="{standalone: true}" [(ngModel)]="form.last_name"    #l="ngModel" required>
+                          </mat-form-field>
+                          <div *ngIf="l.invalid && l.touched">
+                            <mat-error *ngIf="l.errors.required">
+                              Lastname is required
+                              </mat-error>
+                              </div>
+                        </div>
+                     
+          <!--               <div class="alert alert-danger" *ngIf="t.invalid && t.touched">
+                          <div *ngIf="t.errors.required">Firstname is required</div>
+
+                        </div> -->
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                          <mat-form-field>
+                            <mat-label>Prénom</mat-label>
+                            <input matInput placeholder="Prénom" [ngModelOptions]="{standalone: true}"  [(ngModel)]="form.first_name"   #f="ngModel"  required>
+                          </mat-form-field>
+                          <div *ngIf="f.invalid && f.touched">
+                            <mat-error *ngIf="f.errors.required">
+                              Firstname is required
+                              </mat-error>
+                              </div>
+                        </div>
+                      
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                          <mat-form-field>
+                            <mat-label>Tel</mat-label>
+                            <input matInput placeholder="Tel"  [ngModelOptions]="{standalone: true}" [(ngModel)]="form.phone"   #t="ngModel"  required>
+                          </mat-form-field>
+                          <div *ngIf="t.invalid && t.touched">
+                            <mat-error *ngIf="t.errors.required">
+                              Phone is required
+                              </mat-error>
+                              </div>
+                        </div>
+                     <!--    <div class="alert alert-danger" *ngIf="p.invalid && p.touched">
+                          <div *ngIf="p.errors.required">Phone is required</div>
+                        </div> -->
+                     
+                      </div>
+                    
+                      <div class="row">
+                       <!--     <div class="col-md-3">
+                       <mat-form-field>
+                            <mat-label>Username</mat-label>
+                            <input matInput placeholder="Username" [ngModelOptions]="{standalone: true}" [(ngModel)]="form.username"   required>
+                          </mat-form-field>
+                        </div> -->
+
+                        <div class="col-md-3">
+                          <mat-form-field>
+                            <mat-label>Email</mat-label>
+                            <input matInput placeholder="Email" [ngModelOptions]="{standalone: true}" [(ngModel)]="form.email"    #e="ngModel"
+                            pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$' required>   
+                          </mat-form-field>
+                          <div *ngIf="e.invalid && e.touched">
+                            <mat-error *ngIf="e.errors.required">
+                              Usename is required
+                              </mat-error>
+                              <mat-error *ngIf="e.errors.pattern">
+                                Invalid Email
+                                </mat-error>
+                              </div>
+                        </div>
+                      <!--   <div class="alert alert-danger" *ngIf="e.invalid && e.touched">
+                          <div *ngIf="e.errors.required">Usename is required</div>
+                          <div *ngIf="e.errors.pattern"> Invalid Email </div>
+                        </div> -->
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                          <mat-form-field>
+                            <mat-label>Mot de passe</mat-label>
+                            <input  matInput type="password" placeholder="password"  [ngModelOptions]="{standalone: true}" [(ngModel)]="form.password"   #p="ngModel" required>
+<!--                           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                              <mat-icon>{{hide? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button> -->
+
+                          </mat-form-field>
+                          <div *ngIf="p.invalid && p.touched">
+                            <mat-error *ngIf="p.errors.required">
+                              Password is required
+                              </mat-error>
+                              </div>
+                      
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                          <mat-form-field>
+                            <mat-label>Confirmer Mot de passe</mat-label>
+                            <input matInput type="password" [ngModelOptions]="{standalone: true}" [(ngModel)]="form.confirmPassword"   #cp="ngModel" required>
+ <!--                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button> -->
+                        
+                          </mat-form-field>
+                          <div *ngIf="cp.invalid && cp.touched">
+                            <mat-error *ngIf="cp.errors.required">
+                              Phone is required
+                              </mat-error>
+                              </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                          <mat-label>Image</mat-label>
+                        <label class="btn btn-default size">
+                          <input type="file"  (change)="recuperFile($event)" />
+                        </label>
+                      </div>
+                      </div>
+                      <div>
+                        <button mat-button matStepperNext>Suivant</button>
+                      </div>
+                    </form>
+                  </mat-step>
+                  <mat-step [stepControl]="secondFormGroup" label="Info Agence">
+                    <form [formGroup]="secondFormGroup">
+                     <div class="row">
+ 
+                      <div class="col-md-3">
+                          <mat-form-field>
+                            <mat-label>Nom d'agence</mat-label>
+                            <input matInput placeholder="Nom d'agence" [ngModelOptions]="{standalone: true}" [(ngModel)]="form.nom_agence"  #nomag="ngModel" required>
+                          </mat-form-field>
+                          <div *ngIf="nomag.invalid && nomag.touched">
+                            <mat-error *ngIf="nomag.errors.required">
+                              Libellé is required
+                              </mat-error>
+                              </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                  <!--       <div class="col-md-3">
+                          <mat-form-field>
+                            <mat-label>Type d'abonnement</mat-label>
+                    
+                            <mat-select  [(ngModel)]="form.type_abonnement" [ngModelOptions]="{standalone: true}"  #tp="ngModel"  name="type_abonnement" required>
+                              <mat-option *ngFor="let type_abonnement of abonnements" [value]="type_abonnement.value"   >
+                                {{type_abonnement.viewValue}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                          <div *ngIf="tp.invalid && tp.touched">
+                            <mat-error *ngIf="tp.errors.required">
+                              Type d'abonnement is required
+                              </mat-error>
+                              </div>
+                        </div> -->
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                          <mat-form-field>
+                            <mat-label>Matricule Fiscale </mat-label>
+                            <input matInput placeholder="Matricule Fiscale" [ngModelOptions]="{standalone: true}" [(ngModel)]="form.matricule_fiscale"  #mat="ngModel" required>
+                          </mat-form-field>
+                          <div *ngIf="mat.invalid && mat.touched">
+                            <mat-error *ngIf="mat.errors.required">
+                              Mtricule is required
+                              </mat-error>
+                              </div>
+                        </div>
+                      <!--   <div class="col-md-3">
+                              <label for="singleFile">Upload file</label>
+                     <input id="singleFile" type="file" [fileUploadInputFor]= "fileUploadQueue"/>
+                    <br>
+
+               <mat-file-upload-queue #fileUploadQueue
+                        [fileAlias]="'file'"
+           [httpUrl]="'http://localhost:5000/jax-rs-jersey-application-sample'">
+
+    <mat-file-upload [file]="file" [id]="i" *ngFor="let file of fileUploadQueue.files; let i = index"></mat-file-upload>
+</mat-file-upload-queue>
+                        </div> -->
+
+                     </div>
+               
+            
+ 
+
+                      
+                      <div>
+                        <button mat-button matStepperPrevious>Retour</button>
+                        <button mat-button matStepperNext>Suivant</button>
+                      </div>
+                    </form>
+                  </mat-step>
+         <!--         <mat-step  label="Type de payement">
+                  
+                     <div class="row">
+ 
+                      <div class="col-md-3">
+                      
+                        
+                            <mat-radio-group aria-label="Select an option"  [ngModelOptions]="{standalone: true}" [(ngModel)]="form.type_payement"  #pay="ngModel" required>
+                              <mat-radio-button value="chèque">Par chèque </mat-radio-button>
+                              <mat-radio-button value="carte bancaire">Par carte bancaire</mat-radio-button>
+                            </mat-radio-group>
+                            
+                 
+                          <div *ngIf="pay.invalid && pay.touched">
+                            <mat-error *ngIf="pay.errors.required">
+                              type de payement is required
+                              </mat-error>
+                              </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                 
+
+                     </div>
+               
+            
+ 
+
+                      
+                      <div>
+                        <button mat-button matStepperPrevious>Retour</button>
+                        <button mat-button matStepperNext>Suivant</button>
+                      </div>
+                 
+                  </mat-step>
+ -->
+                  <mat-step>
+                    <ng-template matStepLabel>Terminé</ng-template>
+                    <p>Vous avez terminé.</p>
+                    <div>
+                      <button mat-button matStepperPrevious>Retour</button>
+                      <button mat-button (click)="onSubmit()">Enregistrer</button>
+                    </div>
+                  </mat-step>
+                </mat-vertical-stepper>
+
+                <form class="col-lg-6 col-md-12 pt-3 px-4 bg-white" *ngIf="choix==='client'" [formGroup]="registerForm" (ngSubmit)="onSubmitClient()">
+                  <div >
+     
+              <div >
+                <input type="text" placeholder="Prénom"  class="form-control mb-3"  formControlName="first_name" 
+                [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }" required />
+                <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
+                  <div *ngIf="f.first_name.errors.required">* ce champ obligatoire</div>
+                </div>
+              </div>
+                  <div >
+                    <input type="text" placeholder="Nom"  class="form-control mb-3" formControlName="last_name"
+                    [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }" required/>
+                    <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
+                      <div *ngIf="f.last_name.errors.required">* ce champ obligatoire</div>
+                    </div>
+                  </div>
+    
+                <div >
+                  <input type="email" placeholder="Email"  class="form-control mb-3" formControlName="email"
+                  [ngClass]="{ 'is-invalid': submitted && f.email.errors }" required/>
+                  <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                    <div *ngIf="f.email.errors.required">* ce champ obligatoire</div>
+                  </div>
+                  <div class="alert alert-danger" *ngIf="
+                  registerForm.controls['email'].errors &&
+                  registerForm.controls['email'].errors.email
+                    ">
+                    * Veuillez insérer un e-mail valide
+                  </div>
+
+                </div>
+                  <div >
+                    <input type="text" placeholder="Tel"   class="form-control mb-3" formControlName="phone" 
+                    [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" required/>
+                    <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                      <div *ngIf="f.phone.errors.required">* ce champ obligatoire</div>
+                    </div>
+                    <div class="alert alert-danger" *ngIf="
+                    registerForm.controls['phone'].errors &&
+                    registerForm.controls['phone'].errors.pattern
+                  ">
+                  * le numéro doit contenir seulement des chiffres
+                </div>
+                <div class="alert alert-danger" *ngIf="
+                registerForm.controls['phone'].touched &&
+                registerForm.controls['phone'].errors
+                  ">
+                  * le numéro doit avoir au minimum 8 chiffres
+                </div>
+       
+                </div>
+                  <div >
+                    <input   class="form-control mb-3" type="password" placeholder="Mot de passe"  formControlName="password" 
+                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required />
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                      <div *ngIf="f.password.errors.required">* ce champ obligatoire</div>
+                    </div>
+                    <div class="alert alert-danger" *ngIf="
+                    registerForm.controls['password'].touched &&
+                    registerForm.controls['password'].errors
+                      ">
+                      * le mot de passe doit avoir au minimum 6 caractéres
+                    </div>
+          
+                  </div>
+                  <div >
+                    <input type="password" placeholder="Confirmer mot de passe"   class="form-control mb-3" formControlName="confirmPassword" 
+                    [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" required/>
+                    <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                      <div *ngIf="f.confirmPassword.errors.required">* ce champ obligatoire</div>
+                      <div class="alert alert-danger" *ngIf="
+                      registerForm.controls['confirmPassword'].touched &&
+                      registerForm.controls['confirmPassword'].status ===
+                            'INVALID'
+                        ">
+                        *verifier que les mots de passe sont identiques
+                      </div>
+  
+                      <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                        <div *ngIf="f.confirmPassword.errors.required">
+                          * ce champ obligatoire
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                
+                  <div >
+                    <label for="image" class="control-label sr-only">Photo</label>
+    
+                    <input type='file' (change)="readURL($event)" required />
+                    <img class=" imgDefaultAdd" id="file-input" [src]="imageSrc" alt="your image" />
+    
+    
+                  </div>
+               
+           <!--     <div
+                    class="custom-control custom-checkbox custom-control-inline mb-3"
+                  >
+                    <input
+                      type="checkbox"
+                      id="customCheckboxInline1"
+                      name="customCheckboxInline1"
+                      class="custom-control-input"
+                      checked
+                    />
+                    <label
+                      class="custom-control-label"
+                      for="customCheckboxInline1"
+                    >
+                      I accept the terms & conditions.
+                    </label> 
+                  </div> -->
+                  <div class="recover-pass">
+                  
+                  </div>
+                </div>
+
+                  <div class="fg-actions d-flex justify-content-between">
+                    <div class="login-btn">
+                      <button class="btn btn-outline-primary">
+                        <a
+                          href="login-page.html"
+                          class="text-decoration-none"
+                          [routerLink]="['/login']"
+                        >
+                          Back 
+                        </a>
+                      </button>
+                    </div>
+                    <div class="recover-pass">
+                      <button type="submit" class="btn btn-primary">
+               
+                          Register
+                
+                      </button>
+                    </div>
+  
+                  </div>
+             
+                </form>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!--Registration Page Ends-->
+
+
+

@@ -1,0 +1,412 @@
+<app-header ></app-header>
+
+
+<div class="subheader normal-bg section-padding" >
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-custom-white">Annonce Détails</h1>
+                <ul class="custom-flex">
+                    <li class="fw-500">
+                        <a href="index.html" class="text-custom-white">Home</a>
+                    </li>
+                    <li class="fw-500">
+                        <a routerLink="/list-annonces" class="text-custom-white">Annonces</a>
+                    </li>
+                    <li class="active fw-500">
+                        Annonce Détails
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Subheader -->
+<!-- Start Listing detail -->
+<section class="section-padding bg-light-white listing-details">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="listing-details-inner bx-wrapper bg-custom-white padding-20">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="detail-slider-for mb-xl-20 magnific-gallery">
+                                <ngb-carousel>
+                                    <ng-template ngbSlide *ngFor="let img of currentAnnonce?.fileimages">
+                                        <div class="slide-item">
+                                            <a href="assets/assets/images/hotels/slide_1.jpg" class="popup">
+                                                <img src="http://localhost:3000/annonce/getFile/{{
+                                                  img
+                                                  }}" class="image-fit" alt="img">
+                                            </a>
+                                        </div>
+                                 
+                                    </ng-template>
+                                 
+                             <!--        <ng-template ngbSlide>
+                                        <div class="slide-item">
+                                            <a href="assets/assets/images/hotels/slide_1.jpg" class="popup">
+                                                <img src="assets/assets/images/hotels/slide_1.jpg" class="image-fit" alt="img">
+                                            </a>
+                                        </div>
+                                  
+                                    </ng-template>
+                                    <ng-template ngbSlide>
+                                        <div class="slide-item">
+                                            <a href="assets/assets/images/hotels/slide_2.jpg" class="popup">
+                                                <img src="assets/assets/images/hotels/slide_2.jpg" class="image-fit" alt="img">
+                                            </a>
+                                        </div>
+                                   
+                                    </ng-template> -->
+                                    </ngb-carousel>
+                                  
+                    
+                            </div>
+                  
+                            <hr>
+                            <div class="listing-meta-sec mb-md-80">
+                                <div class="tabs">
+                                    <ul class="custom-flex nav nav-tabs mb-xl-20">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" data-toggle="tab" href="#details">Détails</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#commodites">Commodités</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#addresse">Addresse et map</a>
+                                        </li>
+                              <!--           <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#RDV">Commentaires</a>
+                                        </li> -->
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade active show" id="details">
+                                            <div class="tab-inner">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="hotel-type mb-xl-20 bg-light-white padding-10">
+                                                            <ul class="custom">
+                                                                <li class="text-light-dark"><label class="no-margin text-custom-blue">Catégerie:</label>{{currentAnnonce?.categorie}}</li>
+                                                                <li class="text-light-dark"><label class="no-margin text-custom-blue">Type:</label>{{currentAnnonce?.type}}</li>
+                                                                <li class="text-light-dark"><label class="no-margin text-custom-blue">Superfecie:</label>{{currentAnnonce?.superfecie}} M2</li>                                                 
+                                                                <li class="text-light-dark"><label class="no-margin text-custom-blue">Nombre de chambre:</label>{{currentAnnonce?.nbre_chambres}}</li>
+                                                                <li class="text-light-dark"><label class="no-margin text-custom-blue">Nombre de salle de bains:</label>{{currentAnnonce?.pieces_salleBain}}</li>
+                                                                <li class="text-light-dark"><label class="no-margin text-custom-blue">Prix:</label>{{currentAnnonce?.prix}} TND</li>
+                                    <!--                             <li class="text-light-dark"><label class="no-margin text-custom-blue">Neighborhood:</label>{{currentAnnonce?.superfecie}}</li>
+                                                                <li class="text-light-dark"><label class="no-margin text-custom-blue">Cancellation:</label>{{currentAnnonce?.superfecie}}</li>
+                                                                            <li class="text-light-dark"><label class="no-margin text-custom-blue">Nombre de chambre:</label>{{currentAnnonce?.superfecie}}</li> -->
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                             <!--        <div class="col-md-7">
+                                                        <div class="listing-testimonial padding-20 bg-light-white mb-xl-20">
+                                                            <div class="testimonial-inner detail-testimonial">
+                                                                <div class="tesimonial-item">
+                                                                    <cite class="text-custom-blue fs-16">Always enjoyed my stay with Hilton Hotel and Resorts, top class room service and rooms have great outside views and luxury assessories.</cite>
+                                                                    <div class="testimonial-author">
+                                                                        <div class="author-img">
+                                                                            <img src="assets/assets/images/blog/comment_1.jpg" class="rounded-circle" alt="img">
+                                                                        </div>
+                                                                        <div class="author-name ml-2">
+                                                                            <h6 class="text-custom-black no-margin fs-14 fw-500">Jhon</h6>
+                                                                            <p class="no-margin text-light-dark">Guest</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="tesimonial-item">
+                                                                    <cite class="text-custom-blue fs-16">Always enjoyed my stay with Hilton Hotel and Resorts, top class room service and rooms have great outside views and luxury assessories.</cite>
+                                                                    <div class="testimonial-author">
+                                                                        <div class="author-img">
+                                                                            <img src="assets/assets/images/blog/comment_2.jpg" class="rounded-circle" alt="img">
+                                                                        </div>
+                                                                        <div class="author-name ml-2">
+                                                                            <h6 class="text-custom-black no-margin fs-14 fw-500">Jhon</h6>
+                                                                            <p class="no-margin text-light-dark">Guest</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
+                                                    <div class="col-12">
+                                                        <div class="information">
+                                                            <h4 class="text-custom-black">Description</h4>
+                                                            <p class="text-light-dark">{{currentAnnonce?.description}}.</p>
+                                       <!--                      <p class="text-light-dark no-margin">Sed aliquam nunc eget velit imperdiet, in rutrum mauris malesuada. Quisque ullamcorper vulputate nisi, et fringilla ante convallis quis. Nullam vel tellus non elit suscipit volutpat. Integer id felis et nibh rutrum dignissim ut non risus. In tincidunt urna quis sem luctus, sed accumsan magna pellentesque. Donec et iaculis tellus. Vestibulum ut iaculis justo, auctor sodales lectus. Donec et tellus tempus, dignissim maurornare, consequat lacus. Integer dui neque, scelerisque nec sollicitudin sit amet, sodales a erat. Duis vitae condimentum ligula. Integer eu mi nisl. Donec massa dui, commodo id arcu quis, venenatis scelerisque velit.</p> -->
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="commodites">
+                                            <h4 class="text-custom-black">Commodités</h4>
+                                            <!-- <p class="text-light-dark">Maecenas vitae turpis condimentum metus tincidunt semper bibendum ut orci. Donec eget accumsan est. Duis laoreet sagittis elit et vehicula. Cras viverra posuere condimentum.</p> -->
+                                            <ul class="custom amenities row no-gutters">
+                                                <li class="col-md-4 col-sm-6" *ngFor="let co of currentAnnonce?.commodites">
+                                                    <div class="icon-box text-light-dark">
+                                                <img class="taille"src="../../../assets/img/logos/maintenance.png"> 
+                                                        {{co}}
+                                                    </div>
+                                                </li>
+                                              <!--   <li class="col-md-4 col-sm-6">
+                                                    <div class="icon-box text-light-dark">
+                                                        <i class="fas fa-swimming-pool"></i>
+                                                        Swimming pool
+                                                    </div>
+                                                </li>
+                                                <li class="col-md-4 col-sm-6">
+                                                    <div class="icon-box text-light-dark">
+                                                        <i class="fas fa-tv"></i>
+                                                        Television
+                                                    </div>
+                                                </li>
+                                                <li class="col-md-4 col-sm-6">
+                                                    <div class="icon-box text-light-dark">
+                                                        <i class="fas fa-coffee"></i>
+                                                        Coffee
+                                                    </div>
+                                                </li>
+                                                <li class="col-md-4 col-sm-6">
+                                                    <div class="icon-box text-light-dark">
+                                                        <i class="fab fa-youtube"></i>
+                                                        Air Conditioning
+                                                    </div>
+                                                </li>
+                                                <li class="col-md-4 col-sm-6">
+                                                    <div class="icon-box text-light-dark">
+                                                        <i class="fas fa-dumbbell"></i>
+                                                        Fitness Facility
+                                                    </div>
+                                                </li>
+                                                <li class="col-md-4 col-sm-6">
+                                                    <div class="icon-box text-light-dark">
+                                                        <i class="fab fa-youtube"></i>
+                                                        Fridge
+                                                    </div>
+                                                </li>
+                                                <li class="col-md-4 col-sm-6">
+                                                    <div class="icon-box text-light-dark">
+                                                        <i class="fab fa-youtube"></i>
+                                                        Wine Bar
+                                                    </div>
+                                                </li>
+                                                <li class="col-md-4 col-sm-6">
+                                                    <div class="icon-box text-light-dark">
+                                                        <i class="fab fa-youtube"></i>
+                                                        Smoking Allowed
+                                                    </div>
+                                                </li>
+                                                <li class="col-md-4 col-sm-6">
+                                                    <div class="icon-box text-light-dark">
+                                                        <i class="fab fa-youtube"></i>
+                                                        Entertainment
+                                                    </div>
+                                                </li>
+                                                <li class="col-md-4 col-sm-6">
+                                                    <div class="icon-box text-light-dark">
+                                                        <i class="fab fa-youtube"></i>
+                                                        Secure Vault
+                                                    </div>
+                                                </li>
+                                                <li class="col-md-4 col-sm-6">
+                                                    <div class="icon-box text-light-dark">
+                                                        <i class="fab fa-youtube"></i>
+                                                        Pick and Drop
+                                                    </div>
+                                                </li>
+                                                <li class="col-md-4 col-sm-6">
+                                                    <div class="icon-box text-light-dark">
+                                                        <i class="fab fa-youtube"></i>
+                                                        Room Service
+                                                    </div>
+                                                </li>
+                                                <li class="col-md-4 col-sm-6">
+                                                    <div class="icon-box text-light-dark">
+                                                        <i class="fab fa-youtube"></i>
+                                                        Pets Allowed
+                                                    </div>
+                                                </li>
+                                                <li class="col-md-4 col-sm-6">
+                                                    <div class="icon-box text-light-dark">
+                                                        <i class="fab fa-youtube"></i>
+                                                        Play Place
+                                                    </div>
+                                                </li>
+                                                <li class="col-md-4 col-sm-6">
+                                                    <div class="icon-box text-light-dark">
+                                                        <i class="fab fa-youtube"></i>
+                                                        Comp. Breakfast
+                                                    </div>
+                                                </li>
+                                                <li class="col-md-4 col-sm-6">
+                                                    <div class="icon-box text-light-dark">
+                                                        <i class="fab fa-youtube"></i>
+                                                        Free Parking
+                                                    </div>
+                                                </li>
+                                                <li class="col-md-4 col-sm-6">
+                                                    <div class="icon-box text-light-dark">
+                                                        <i class="fab fa-youtube"></i>
+                                                        Confrence Room
+                                                    </div>
+                                                </li>
+                                                <li class="col-md-4 col-sm-6">
+                                                    <div class="icon-box text-light-dark">
+                                                        <i class="fab fa-youtube"></i>
+                                                        Fire Place
+                                                    </div>
+                                                </li>
+                                                <li class="col-md-4 col-sm-6">
+                                                    <div class="icon-box text-light-dark">
+                                                        <i class="fab fa-youtube"></i>
+                                                        Handicap Accesible
+                                                    </div>
+                                                </li>
+                                                <li class="col-md-4 col-sm-6">
+                                                    <div class="icon-box text-light-dark">
+                                                        <i class="fab fa-youtube"></i>
+                                                        Doorman
+                                                    </div>
+                                                </li>
+                                                <li class="col-md-4 col-sm-6">
+                                                    <div class="icon-box text-light-dark">
+                                                        <i class="fab fa-youtube"></i>
+                                                        Hot Tub
+                                                    </div>
+                                                </li>
+                                                <li class="col-md-4 col-sm-6">
+                                                    <div class="icon-box text-light-dark">
+                                                        <i class="fab fa-youtube"></i>
+                                                        Elevator In Building
+                                                    </div>
+                                                </li>
+                                                <li class="col-md-4 col-sm-6">
+                                                    <div class="icon-box text-light-dark">
+                                                        <i class="fab fa-youtube"></i>
+                                                        Suitable for Events
+                                                    </div>
+                                                </li> -->
+                                            </ul>
+                                        </div>
+                                        <div class="tab-pane fade" id="addresse">
+                                            <div fxLayout="column" fxLayoutAlign="center"id="accordion" class="custom-accordion">
+                                                <div fxFlex class="card">
+                                                    <div class="card-header" id="headingOne">
+                                                        <button class="collapsebtn" data-toggle="collapse" data-target="#collapseOne">
+                                                          Addresse
+                                                        </button>
+                                                    </div>
+                                                    <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                                                      <div class="card-body">
+                                                        <ul class="custom">
+                                                            <li class="text-light-dark"><label class="no-margin text-custom-blue">Région:</label>{{currentAnnonce?.addresse.region}}</li>
+                                                            <li class="text-light-dark"><label class="no-margin text-custom-blue">Délegation:</label>{{currentAnnonce?.addresse.delegation}}</li>                                                 
+                                                          <!--   <li class="text-light-dark"><label class="no-margin text-custom-blue">Code Postal:</label>{{currentAnnonce?.addresse.localite
+                                                            }}</li> -->
+                                
+                                                        </ul>
+                                                      </div>
+                                                    </div>
+
+
+                                                 
+                 
+
+                                                        <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+                                                   
+                                                 
+                                                </div>
+<div class="card">
+                                                <div class="card-header" id="headingOne">
+                                                    <button class="collapsebtn" data-toggle="collapse" data-target="#collapseOne">
+                                                    Map
+                                                    </button>
+                                                </div>
+
+                                            </div>
+                                            <div fxFlex>
+                                                <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+                                                    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+                                                  </agm-map>
+                                            </div>
+   </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 ">
+                         <div class="row">
+                        <!--     <div *ngIf="alertRDV==true " class="alert alert-success" role="alert">
+                                votre Rendez-Vous a été envoyé avec succés!
+                              </div> -->
+                              <div class="col-12">
+                                    <div class="quick-quote bx-wrapper padding-20 mb-xl-30 ">
+                                        <h5 class="text-custom-blue">Voulez vous prendre un rendez-vous ?</h5>
+                                        <form>
+                                            <div class="row">
+                                                <div class="col-12">
+                                             
+                                                    <div class="form-group">
+                   
+                                                        <label class="fs-14 text-custom-black fw-500">Choisir une Date Pour un RDV</label>
+                                                        <select class=" form-control form-control-custom"  name="dispo"    [ngModelOptions]="{standalone: true}" [(ngModel)]="RDV">
+                                                            <option value="" disabled selected>Choisir une Date</option>
+                                                            <option *ngFor="let categorie of events"  [value]="categorie.id">{{categorie.start| date :'short':'UTC'}}</option>
+                                                       
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="fs-14 text-custom-black fw-500">Message</label>
+                                                        <div class="input-group group-form">
+                                                            <textarea
+                                                            type="textarea"
+                                                            class="form-control textarea"
+                                                            style="min-width : 100px;
+                                                            min-height : 100px;"
+                                                            [(ngModel)]="commentaire"
+                                                            [ngModelOptions]="{standalone: true}"
+                                                          ></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <button type="submit" class="btn-first btn-submit full-width btn-height"  (click)='CreateAppointment(currentAnnonce.titre)'>Confirmer</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                         
+                                    <div class="need-help bx-wrapper padding-20">
+                                        <h5 class="text-custom-black">Contacter l'annonceur.</h5>
+                                        <p class="text-light-dark">Nous serions plus qu'heureux de vous aider. Nos conseillers d'équipe sont à votre service 24h/24 et 7j/7 pour vous aider.</p>
+                                        <ul class="custom">
+                                            <li class="text-custom-blue fs-18">
+                                                <i class="fas fa-phone-alt"></i>
+
+                                                <a href="#" class="text-light-dark">(+216) {{currentAnnonce.professionnel.phone}}</a>
+                                            </li>
+                                            <li class="text-custom-blue fs-18">
+                                                <i class="fas fa-envelope"></i>
+                                                <a href="#" class="text-light-dark fs-14">{{currentAnnonce.professionnel.email}}</a>
+                                            </li>
+                                        </ul>
+                                        <button type="submit" class="btn-first btn-submit full-width btn-height"  (click)='sendEvent(currentAnnonce.professionnel)'>Discuter avec l'annonceur</button>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Listing detail -->
+<!-- Start Partners -->
+<app-footer></app-footer>

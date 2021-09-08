@@ -1,0 +1,315 @@
+<header class="header">
+    <!-- Topbar -->
+    <div class="topbar bg-custom-blue">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+            <!--         <div class="left-side">
+                        <ul class="custom-flex">
+                            <li>
+                                <a href="#" class="text-custom-white">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-custom-white">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-custom-white">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-custom-white">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div> -->
+                </div>
+                <div class="col-sm-6">
+                    <div class="right-side">
+                        <ul class="custom-flex">
+                
+                            <li *ngIf="!isLoggedIn">
+                                <a   [routerLink]="['/login']"  class="text-custom-white">S'authentifier</a>
+                            </li>
+
+                            <li *ngIf="!isLoggedIn">
+                                <a   [routerLink]="['/register']" class="text-custom-white">S'inscrire</a>
+                            </li >
+                            <li *ngIf="isLoggedIn" class="nav-item" ngbDropdown [placement]="placement">
+                                <a class="nav-link position-relative" id="dropdownBasic3" ngbDropdownToggle>
+                                    <i class="ft-user font-medium-3 blue-grey darken-4"></i>
+                                    <p class="d-none">User Settings</p>
+                                </a>
+                                <div ngbDropdownMenu aria-labelledby="dropdownBasic3" class="text-left">                           
+                                    <a class="dropdown-item py-1" routerLink="/profile-client/{{user._id}}">
+                                        <!-- <i class="ft-edit mr-2"></i> -->
+                                        <span>{{user.first_name}}  {{user.last_name}}</span>
+                                    </a> 
+        
+        <!--                             <a class="dropdown-item py-1" routerLink="/inbox">
+                                        <i class="ft-mail mr-2"></i>
+                                        <span>My Inbox</span>
+                                    </a>
+                                    <a class="dropdown-item py-1" href="javascript:;">
+                                        <i class="ft-settings mr-2"></i>
+                                        <span>Settings</span>
+                                    </a> -->
+                                    <div class="dropdown-divider"></div>
+                                    <a (click)="logout()" class="dropdown-item" href="javascript:;">
+                                        <i class="ft-power mr-2"></i>
+                                        <span>Logout</span>
+                                    </a>
+                                </div>
+                            </li>
+                      <!--       <li>
+                                <select>
+                                    <option>USD</option>
+                                    <option>INR</option>
+                                    <option>EURO</option>
+                                </select>
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar -->
+    <!-- Navigation -->
+    <div class="navigation">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="main-navigation">
+                        <div class="logo">
+                       <a href="index.html">
+                                 <img src="../../../assets/assets/images/horizontal_on_white_by_logaster.png" class="imgT" alt="img">
+                            </a>
+                        </div>
+                        <div class="main-menu">
+                            <div class="logo">
+                                <a href="index.html">
+                                     <img src="../../../assets/assets/images/horizontal_on_white_by_logaster.png" class="imgT" >
+                                </a>
+                            </div>
+                            <nav>
+                                <ul class="custom-flex">
+                                    <li class="menu-item active">
+                                        <a [routerLink]="['/home']"  class="text-light-dark">Home</a>
+                                    </li>
+                                    <li class="menu-item menu-item-has-children">
+                                        <a [routerLink]="['/list-annonces']" class="text-light-dark">Annonces</a>
+                                 <!--        <ul class="custom sub-menu">
+                                            <li class="menu-item menu-item-has-children">
+                                                <a href="#" class="text-custom-white">Hotels Grid</a>
+                                                <ul class="custom sub-menu">
+                                                    <li class="menu-item">
+                                                        <a href="hotels.html" class="text-custom-white">Full Width</a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a href="hotel-left-sidebar.html" class="text-custom-white">Left Sidebar</a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a href="hotel-right-sidebar.html" class="text-custom-white">Right Sidebar</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="hotel-detail.html" class="text-custom-white">Hotels Detail</a>
+                                            </li>
+                                        </ul> -->
+                                    </li>
+                               <!--      <li class="menu-item menu-item-has-children">
+                                        <a href="#" class="text-light-dark">Flights</a>
+                                        <ul class="custom sub-menu">
+                                            <li class="menu-item menu-item-has-children">
+                                                <a href="#" class="text-custom-white">Flights Grid</a>
+                                                <ul class="custom sub-menu">
+                                                    <li class="menu-item">
+                                                        <a href="flights.html" class="text-custom-white">Full Width</a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a href="flights-left-sidebar.html" class="text-custom-white">Left Sidebar</a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a href="flights-right-sidebar.html" class="text-custom-white">Right Sidebar</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="flight-detail.html" class="text-custom-white">Flights Detail</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item menu-item-has-children">
+                                        <a href="#" class="text-light-dark">Cars</a>
+                                        <ul class="custom sub-menu">
+                                            <li class="menu-item menu-item-has-children">
+                                                <a href="#" class="text-custom-white">Cars Grid</a>
+                                                <ul class="custom sub-menu">
+                                                    <li class="menu-item">
+                                                        <a href="cars.html" class="text-custom-white">Full Width</a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a href="cars-left-sidebar.html" class="text-custom-white">Left Sidebar</a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a href="cars-right-sidebar.html" class="text-custom-white">Right Sidebar</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="car-detail.html" class="text-custom-white">Cars Detail</a>
+                                            </li>
+                                        </ul>
+                                    </li> -->
+                                    <li class="menu-item menu-item-has-children">
+                                        <a *ngIf="isLoggedIn"  [routerLink]="['/RdvCLient']" class="text-light-dark">Rendez-vous</a>
+                                     <!--    <ul class="custom sub-menu">
+                                            <li class="menu-item">
+                                                <a href="about.html" class="text-custom-white">About Us</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="faqs.html" class="text-custom-white">Faqs</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="booking.html" class="text-custom-white">Booking</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="gallery.html" class="text-custom-white">Gallery</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="404.html" class="text-custom-white">404</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="coming-soon.html" class="text-custom-white">Coming Soon</a>
+                                            </li>
+                                        </ul> -->
+                                    </li>
+                                    <li class="menu-item menu-item-has-children">
+                                        <a  *ngIf="isLoggedIn"  [routerLink]="['/reclamations']" class="text-light-dark">Réclamations</a>
+                                     <!--    <ul class="custom sub-menu">
+                                            <li class="menu-item menu-item-has-children">
+                                                <a href="#" class="text-custom-white">Blog Grid</a>
+                                                <ul class="custom sub-menu">
+                                                    <li class="menu-item">
+                                                        <a href="blog.html" class="text-custom-white">Grid View</a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a href="blog-left-sidebar.html" class="text-custom-white">Left Sidebar</a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a href="blog-right-sidebar.html" class="text-custom-white">Right Sidebar</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="menu-item menu-item-has-children">
+                                                <a href="#" class="text-custom-white">Blog Details</a>
+                                                <ul class="custom sub-menu">
+                                                    <li class="menu-item">
+                                                        <a href="blog-details.html" class="text-custom-white">Full Width</a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a href="blog-details-left-sidebar.html" class="text-custom-white">Left Sidebar</a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a href="blog-details-right-sidebar.html" class="text-custom-white">Right Sidebar</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul> -->
+                                    </li>
+                                    <li class="menu-item menu-item-has-children">
+                                        <a *ngIf="isLoggedIn" [routerLink]="['/favoris']" class="text-light-dark">Favoris</a>
+                                     <!--    <ul class="custom sub-menu">
+                                            <li class="menu-item menu-item-has-children">
+                                                <a href="#" class="text-custom-white">Blog Grid</a>
+                                                <ul class="custom sub-menu">
+                                                    <li class="menu-item">
+                                                        <a href="blog.html" class="text-custom-white">Grid View</a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a href="blog-left-sidebar.html" class="text-custom-white">Left Sidebar</a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a href="blog-right-sidebar.html" class="text-custom-white">Right Sidebar</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="menu-item menu-item-has-children">
+                                                <a href="#" class="text-custom-white">Blog Details</a>
+                                                <ul class="custom sub-menu">
+                                                    <li class="menu-item">
+                                                        <a href="blog-details.html" class="text-custom-white">Full Width</a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a href="blog-details-left-sidebar.html" class="text-custom-white">Left Sidebar</a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a href="blog-details-right-sidebar.html" class="text-custom-white">Right Sidebar</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul> -->
+                                    </li>
+                            <!--         <li class="menu-item menu-item-has-children">
+                                        <a href="#" class="text-light-dark">Blog</a>
+                                        <ul class="custom sub-menu">
+                                            <li class="menu-item menu-item-has-children">
+                                                <a href="#" class="text-custom-white">Blog Grid</a>
+                                                <ul class="custom sub-menu">
+                                                    <li class="menu-item">
+                                                        <a href="blog.html" class="text-custom-white">Grid View</a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a href="blog-left-sidebar.html" class="text-custom-white">Left Sidebar</a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a href="blog-right-sidebar.html" class="text-custom-white">Right Sidebar</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="menu-item menu-item-has-children">
+                                                <a href="#" class="text-custom-white">Blog Details</a>
+                                                <ul class="custom sub-menu">
+                                                    <li class="menu-item">
+                                                        <a href="blog-details.html" class="text-custom-white">Full Width</a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a href="blog-details-left-sidebar.html" class="text-custom-white">Left Sidebar</a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a href="blog-details-right-sidebar.html" class="text-custom-white">Right Sidebar</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="contact.html" class="text-light-dark">Contact Us</a>
+                                    </li> -->
+                                </ul>
+                            </nav>
+                        <!--     <div class="cta-btn">
+                                <a href="booking.html" class="btn-first btn-submit">Créer une annonce</a>
+                            </div> -->
+                        </div>
+                        <div class="hamburger-menu">
+                            <div class="menu-btn">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Navigation -->
+</header>

@@ -1,0 +1,125 @@
+// For Registration page
+.nav{
+  margin: 0px;
+  padding: 0px important;
+}
+#regestration {
+  background-image: url("../../../assets/img/gallery/light-bg.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  .register-img {
+    background: #f0f0f0;
+    padding: 0;
+  }
+
+  .login-btn {
+    padding-right: 0px;
+    .btn.btn-outline-primary {
+      &:hover {
+        a {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  .recover-pass {
+    button.btn.btn-primary {
+      color: #fff !important;
+    }
+  }
+  .container-fluid{
+    padding: 0px important;
+  
+  }
+  .mat-stepper-horizontal {
+    margin-top: 8px;
+  }
+  
+  .mat-form-field {
+    margin-top: 16px;
+  }
+  .example-container .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+  
+  .example-right-align {
+    text-align: right;
+  }
+  
+  input.example-right-align::-webkit-outer-spin-button,
+  input.example-right-align::-webkit-inner-spin-button {
+    display: none;
+  }
+  
+  input.example-right-align {
+    -moz-appearance: textfield;
+  }
+  .mat-form-field {
+    margin-top: 16px;
+  }
+
+  .btn-first{
+    display: inline-block;
+    padding: 12px 40px;
+    position: relative;
+    transition: 0.5s all;
+    background: transparent;
+    color: inherit;
+    border: 1px solid transparent;
+    font-size: 14px;
+    overflow: hidden;
+    z-index: 1;
+    text-align: center;
+    text-transform: uppercase;
+}
+.btn-submit{
+    border-color: #ff5722;
+    color: #ff5722;
+    background: #fff; 
+}
+.btn-small:before,
+.btn-submit:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background-color: #16dbca;
+    width: 0%;
+    transition: 0.5s all;
+    z-index: -1;
+}
+.btn-small:hover,
+.btn-submit:hover{
+    color: #fff;
+}
+.btn-small:focus,
+.btn-submit:focus{
+    background-color: #00a3c8;
+    color: #fff;
+}
+.btn-small:hover:before,
+.btn-submit:hover:before{
+    width: 100%;
+}
+.pos{
+  padding-left:0px;
+}
+}
+.imgDefault{
+  width: 13%;
+  height: 13%;
+  border-radius: 80%;
+  float: right;
+  padding-bottom: 3%;
+}
+.imgDefaultAdd{
+  width: 7%;
+  height: 7%;
+  border-radius: 80%;
+  float: right;
+  margin-bottom: 3%;
+  margin-right: 5%;
+}

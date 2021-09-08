@@ -1,0 +1,1258 @@
+
+<div *ngIf="add==false && update==false">
+<div class="row">
+ <!--    <div class="col-6 mt-3 mb-1 text-left">
+      <div class="content-header">Gestion des annonces </div>
+      <p class="content-sub-header">Consulter et gérer vos annonces facilement.</p>
+    </div> -->
+   <!--  <div class="col-6 mt-3 mb-1 text-right">
+      <img src="https://www.flaticon.com/svg/static/icons/svg/3310/3310176.svg" height="75px" width="75px">
+    </div> -->
+
+    
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <!-- <li class="breadcrumb-item">Annonces</li> -->
+        <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/annonces']">Liste des annonces</a></li>
+      </ol>
+    </nav>
+  </div>
+  <section >
+    <div *ngIf="alertAddAnn==true " class="alert alert-success" role="alert">
+      Votre annonce a été crée avec succés !
+    </div>
+    <div *ngIf="alertUpdateAnn==true " class="alert alert-success" role="alert">
+      Votre annonce a été modifié avec succés !
+    </div>
+    <div >
+      <div class="card-body pt-3 text-left">
+
+        <form class="taskboard-app-input row">
+          <fieldset class="position-relative has-icon-left col-md-8 col-12 mb-1">
+            <!-- <h4 class="card-title">Liste des annonces</h4> -->
+
+
+
+          </fieldset>
+          <fieldset class="position-relative has-icon-left col-md-9 col-12 mb-1">
+            <div class="position-relative has-icon-right">
+              <input type="text" class="form-control round" placeholder="Chercher une annonce"
+              [(ngModel)]="annonceValue" name="annonceValue">
+              <div class="form-control-position">
+                  <i class="ft-search"></i>
+              </div>
+          </div>
+          </fieldset>
+
+          <fieldset *ngIf='user.role=="Profesional"' class="position-relative has-icon-left col-md-3 col-12 mb-1 add-task-btn">
+<!--             <button type="button" class="btn btn-raised btn-primary px-4 mb-0"  (click)="openModal(addAnnonce)" > -->
+              <button type="button" class="btn btn-raised btn-primary px-4 mb-0"  (click)="addAnn()">
+              <i class="ft ft-plus-circle d-lg-none d-xl-inline-block long"></i>Nouvelle annonce
+              <!-- <span class="d-lg-inline-block d-none ml-1" >Ajouter annonce</span> -->
+            </button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </section>
+  <section id="shopping-cart">
+    <div class="row text-left">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Annonces</h4>
+          </div>
+          <div class="card-content">
+            <div class="card-body">
+              <table     class="table table-responsive-md text-center">
+                <thead>
+                  <tr>
+                    <th>Image</th>
+                    <th>Titre</th>
+                    <th>Catégorie</th>
+                    <th>Prix</th>
+                    <th>Addresse</th>
+                    <th>Superfecie</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                   
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let annonce of annonces | searchAnnonce: annonceValue | paginate: { itemsPerPage: 4, currentPage: pa }">
+                 <td><img class="media-object round-media" src="http://localhost:3000/annonce/getFile/{{
+                  annonce?.fileimages[0]
+                }}" alt="Generic placeholder image"
+                        style="height: 75px;" /></td>
+                    <td> {{annonce.titre}}</td>
+                    <td>{{annonce.categorie}}</td>
+                    <td>{{annonce.prix}}</td>
+                    <td>{{annonce.addresse.region}}</td>
+                    <td>{{annonce.superfecie}}</td>
+            
+                    <td>
+                      <!-- <button *ngIf='annonce.Status==false && user.role=="Admin"'  class="btn btn-raised btn-round btn-danger">En attente</button> -->
+                      <!-- <a *ngIf='annonce.Status==true && user.role=="Admin"'class="btn btn-raised btn-round btn-success">Publié</a> -->
+                      
+                      <a  *ngIf='annonce.Status=="Accepted" && (user.role=="Profesional" || user.role=="Admin")' class="btn btn-outline-success mr-1">Publié</a>
+                      <a  *ngIf='annonce.Status=="Refused"  && (user.role=="Profesional" || user.role=="Admin")' class="btn btn-outline-danger mr-1"> Refusé</a>
+                      <a  *ngIf='annonce.Status=="Pending"   && (user.role=="Profesional"|| user.role=="Admin")' class="btn btn-outline-warning mr-1">En attente</a>
+                    </td>
+                  
+                   
+                    <td >
+                      <a routerLink="/annonces-details/{{annonce._id }}" class="info p-0" data-original-title="" title="">
+                    <i  *ngIf='annonce.Status=="Accepted" || annonce.Status=="Refused" ||   user.role=="Profesional"' class="ft-file-text font-medium-3 mr-2  IconDetails"  title="Détails"></i> 
+                        <!-- <i class="fa-info-square font-medium-2 mr-2"></i> -->
+                      </a>
+                  <!--     <a routerLink="/annonces-details/{{annonce._id }}" class="info p-0" data-original-title="" title="">
+                        <i  *ngIf='user.role=="Admin" && annonce.Status==false' class="ft-file-text font-medium-3 mr-2  IconDetails"  title="Détails"></i>
+                          </a> -->
+                    
+                     <a  (click)="getAnnonceById(annonce._id);updateAnn()" class="success p-0" data-original-title="" title="">
+                        <i  *ngIf='user.role=="Profesional"' class="fas fa-edit font-medium-3 mr-2 IconToAcceptDemande" title="Modifier"></i>
+                      </a> 
+                      <a (click)='deleteAnnonce(annonce._id)' class="danger p-0" data-original-title="" title="">
+                        <i  *ngIf='user.role=="Profesional"' class="fas fa-trash-alt font-medium-3 mr-2 IconToDeleteDemande" title="Supprimer"> </i>
+                      
+                      </a>
+                      <button (click)='publishAnnonce(annonce._id)' *ngIf='annonce.Status=="Pending" && user.role=="Admin"'  type="button" class="btn btn-raised btn-round btn-success" >Accepter</button>&nbsp;
+                      <button (click)='refuseAnnonce(annonce._id)' *ngIf='annonce.Status=="Pending" && user.role=="Admin"' type="button" class="btn btn-raised btn-round btn-danger" >Refuser</button>
+                    
+                    </td>
+                  </tr>
+           
+    
+            <!--       <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><button class="btn btn-success btn-raised">Continue</button> </td>
+                  </tr> -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div   style="float: right">
+    <pagination-controls (pageChange)="pa = $event"></pagination-controls>
+  </div>
+</div>
+<!--   <ul class="pagination justify-content-center">
+    <li class="page-item"><a (click)="previousClick()" class="page-link">Previous</a></li>
+    <li *ngFor='let index of pageIndexes' class="page-item" [ngClass]="active(index)">
+            <a (click)="getPaginationWithIndex(index)" class="page-link">
+              {{index + 1}}
+            </a>
+    </li>
+    <li class="page-item"><a (click)="nextClick()" class="page-link">Next</a></li>
+  </ul> -->
+<!-- <button type="button" class="btn btn-primary" (click)="openModal(addAnnonce)">Open modal</button> -->
+
+<!-- <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1"
+      role="dialog" aria-labelledby="dialog-sizes-name1">
+   <div class="modal-dialog modal-lg">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h4 id="dialog-sizes-name1" class="modal-title pull-left">Ajouter annonce</h4>
+        <button type="button" class="close pull-right" (click)="lgModal.hide()" aria-label="Close"> 
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+       <div class="modal-body">
+  
+
+                <mat-horizontal-stepper [linear]="isLinear" #stepper>
+          
+                  <mat-step [stepControl]="firstFormGroup" label="Infos annonce">
+                      <form [formGroup]="firstFormGroup">
+                        <ng-template matStepLabel>Infos annonce</ng-template>
+                        <div class="row">
+                          <div class="col-md-3">
+                            <mat-form-field>
+                              <mat-label>Titre</mat-label>
+                              <input matInput placeholder="Titre"  id="titre" [(ngModel)]="form.titre" [ngModelOptions]="{standalone: true}" 
+                             >
+                            </mat-form-field>
+                     
+                          </div>
+                          <div class="col-md-1"></div>
+                       
+                          <div class="col-md-3">
+                            <mat-form-field>
+                              <mat-label>Type</mat-label>
+                             
+                              <mat-select  [(ngModel)]="form.type" [ngModelOptions]="{standalone: true}"    name="type" required>
+                                <mat-option *ngFor="let type of types" [value]="type.value"   >
+                                  {{type.viewValue}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+
+                          <div class="col-md-1"></div>
+                     
+                          <div class="col-md-3">
+                            <mat-form-field>
+                              <mat-label>Prix</mat-label>
+                              <input matInput placeholder="Prix " type="number"[ngModelOptions]="{standalone: true}" [(ngModel)]="form.prix"    #e="ngModel" required>
+                            </mat-form-field>
+                            <div *ngIf="e.invalid && e.touched">
+                              <mat-error *ngIf="e.errors.required">
+                                Prix is required
+                                </mat-error>
+                                </div>
+                          </div>
+              
+                          <div class="col-md-1"></div>                             
+                        </div>
+                      
+                        <div class="row">
+    
+  
+                          <div class="col-md-1"></div>
+     
+                        </div>
+
+                        <div class="row">
+                          <div >
+                            <mat-form-field  style="width: 720px;">
+                              <mat-label>Description</mat-label>
+                              <textarea matInput   rows="10" cols="100" placeholder="Description"  [ngModelOptions]="{standalone: true}" [(ngModel)]="form.description"    #d="ngModel" required></textarea>
+                            </mat-form-field>
+                          </div>
+  
+                       
+
+
+
+                          <div class="col-md-1"></div>
+     
+                        </div>
+
+                        <div class="col-md-1"></div>
+                        <div>
+                          <button mat-button matStepperNext>Suivant</button>
+                        </div>
+                      </form>
+                    </mat-step>
+                    <mat-step [stepControl]="secondFormGroup" label="Détails annonce">
+                      <form [formGroup]="secondFormGroup">
+                    
+              
+                        <div class="row">
+                          <div class="col-md-3">
+                            <mat-form-field>
+                              <mat-label>Superfecie</mat-label>
+                              <input type="number" matInput placeholder="Superfecie"  [ngModelOptions]="{standalone: true}" [(ngModel)]="form.superfecie"   
+                              required>
+                            </mat-form-field>
+                     
+                          </div>
+                          <div class="col-md-1"></div>
+                       
+                          <div class="col-md-3">
+                            <mat-form-field>
+                              <mat-label>Chambres</mat-label>
+                             
+                              <mat-select  [(ngModel)]="form.nbre_chambres" [ngModelOptions]="{standalone: true}"    name="chambre" required>
+                                <mat-option *ngFor="let chambre of chambres" [value]="chambre.value"   >
+                                  {{chambre.viewValue}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+
+                          <div class="col-md-1"></div>
+                   
+                          <div class="col-md-3">
+                            <mat-form-field>
+                              <mat-label>SDB</mat-label>
+                             
+                              <mat-select  [(ngModel)]="form.pieces_salleBain" [ngModelOptions]="{standalone: true}"    name="sdb" required>
+                                <mat-option *ngFor="let sdb of salleBains" [value]="sdb.value"   >
+                                  {{sdb.viewValue}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+
+                          <div class="col-md-1"></div>                             
+                        </div>
+                      
+                        <div class="row">
+                        
+                           
+                         
+                            <mat-label>Catégorie</mat-label>
+                        
+                            <div   id="outer">   
+                          <mat-radio-group aria-label="Select an option"  [ngModelOptions]="{standalone: true}" [(ngModel)]="form.categorie"  required>
+                            <div  class="inner">  <mat-radio-button (click)="getAppartementOptions()" value="appartement">Appartement </mat-radio-button></div>&nbsp;&nbsp;&nbsp;
+                            <div  class="inner"> <mat-radio-button (click)="getMaisonOptions()" value="maison">Maison</mat-radio-button></div>&nbsp;&nbsp;&nbsp;
+                            <div  class="inner"><mat-radio-button (click)="getTerrainOptions()" value="terrain">Terrain</mat-radio-button></div>&nbsp;&nbsp;&nbsp;
+                          </mat-radio-group>
+
+                        </div>
+                    
+                        
+     
+                        </div>
+
+                        <div class="row">
+                         
+  
+                          <div class="col-md-3" *ngIf="model.appartement==true">
+                            <mat-form-field>
+                              <mat-label>Etage</mat-label>
+                              <input type="number" matInput placeholder="Etage"  [ngModelOptions]="{standalone: true}" [(ngModel)]="form.etage"   
+                              required>
+                            </mat-form-field>
+                     
+                          </div>
+
+
+                          <div  *ngIf="model.terrain==true" >
+                          <mat-label>Usage</mat-label>
+                        
+                          <div   id="outer">   
+                        <mat-radio-group aria-label="Select an option"  [ngModelOptions]="{standalone: true}" [(ngModel)]="form.categorie"  required>
+                          <div  class="inner">  <mat-radio-button value="appartement">Habitation </mat-radio-button></div>&nbsp;&nbsp;&nbsp;
+                          <div  class="inner"> <mat-radio-button value="maison">Commercial</mat-radio-button></div>&nbsp;&nbsp;&nbsp;
+                        </mat-radio-group>
+
+                      </div>
+                    </div>
+
+                          <div class="col-md-1"></div>
+     
+                        </div>
+                        <div class="col-md-3 marg ">
+                          <mat-label>Images</mat-label>
+                        <label class="btn btn-default size">
+                          <input type="file" multiple (change)="recuperFile($event)" />
+                        </label>
+                      </div>
+                        <div class="col-md-1"></div>
+  
+                        
+                        <div>
+                          <button mat-button matStepperPrevious>Retour</button>
+                          <button mat-button matStepperNext>Suivant</button>
+                        </div>
+                      </form>
+                    </mat-step>
+
+                    <mat-step  label="Commodités">
+                      <div class="row marg">
+                        <mat-checkbox class="example-margin" [(ngModel)]="climatisation">Climatisation</mat-checkbox>&nbsp;&nbsp;&nbsp;
+                        <mat-checkbox class="example-margin" [(ngModel)]="meuble">Meuble</mat-checkbox>&nbsp;&nbsp;&nbsp;
+                        <mat-checkbox class="example-margin" [(ngModel)]="ascenseur">Ascenseur</mat-checkbox>&nbsp;&nbsp;&nbsp;
+                        <mat-checkbox class="example-margin" [(ngModel)]="jardin">Jardin</mat-checkbox>&nbsp;&nbsp;&nbsp;
+                        </div>
+                        <div class="row marg">
+                        <mat-checkbox class="example-margin" [(ngModel)]="cuisine">Cuisine equipé</mat-checkbox>&nbsp;&nbsp;&nbsp;
+                        <mat-checkbox class="example-margin" [(ngModel)]="parking">Parking</mat-checkbox>&nbsp;&nbsp;&nbsp;
+    
+                      </div>
+                        
+                      <div>
+                            <button mat-button matStepperPrevious>Retour</button>
+                            <button mat-button matStepperNext>Suivant</button>
+                          </div>
+                     
+                      </mat-step>
+                   <mat-step  label="Addresse">
+                    <div class="row">
+                    <div class="col-md-3">
+                      <mat-form-field>
+                        <mat-label>Région</mat-label>
+                      
+                        <mat-select  [(ngModel)]="addresse.region" [ngModelOptions]="{standalone: true}" id="region"  (selectionChange)='onChangeRegion($event)' name="region" required>
+                          <mat-option *ngFor="let region of regions" [value]="region.value"   >
+                            {{region.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-1"></div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3" *ngIf='selectedRegion=="ben arous"' >
+                      <mat-form-field >
+                        <mat-label>Ville</mat-label>
+                      
+                        <mat-select  [(ngModel)]="addresse.ville" [ngModelOptions]="{standalone: true}"    name="villearous" required>
+                          <mat-option *ngFor="let villearous of villesBenArous" [value]="villearous.value"   >
+                            {{villearous.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+         
+                    <div class="col-md-3" *ngIf='selectedRegion=="manouba "' >
+                      <mat-form-field >
+                        <mat-label>Ville</mat-label>
+                      
+                        <mat-select  [(ngModel)]="addresse.ville" [ngModelOptions]="{standalone: true}"    name="villemanouba" required>
+                          <mat-option *ngFor="let villemanouba of villesManouba" [value]="villemanouba.value"   >
+                            {{villemanouba.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                
+                    <div class="col-md-3"*ngIf='selectedRegion=="tunis "' >
+                      <mat-form-field >
+                        <mat-label>Ville</mat-label>
+                       
+                        <mat-select  [(ngModel)]="addresse.ville" [ngModelOptions]="{standalone: true}"    name="villetunis" required>
+                          <mat-option *ngFor="let villetunis of villesTunis" [value]="villetunis.value"   >
+                            {{villetunis.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+
+             
+                    <div class="col-md-3" *ngIf='selectedRegion=="ariana "'>
+                      <mat-form-field >
+                        <mat-label>Ville</mat-label>
+                       
+                        <mat-select  [(ngModel)]="addresse.ville" [ngModelOptions]="{standalone: true}"    name="villeariana" required>
+                          <mat-option *ngFor="let villeariana of villesAriana" [value]="villeariana.value"   >
+                            {{villeariana.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  
+                
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-3" >
+                      <mat-form-field>
+                        <mat-label>Rue</mat-label>
+                        <input type="text" matInput placeholder="Rue"  [ngModelOptions]="{standalone: true}" [(ngModel)]="addresse.rue"   
+                        required>
+                      </mat-form-field>
+               
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3" >
+                      <mat-form-field>
+                        <mat-label>Code postal</mat-label>
+                        <input type="number" matInput placeholder="Code postal"  [ngModelOptions]="{standalone: true}" [(ngModel)]="addresse.code_postal"   
+                        required>
+                      </mat-form-field>
+               
+                    </div>
+                  </div>
+
+                    <div class="container" fxLayout="column" fxLayoutAlign="center">
+
+                      <div fxFlex fxFlexAlign="left"
+                    
+                      class="autocomplete-container"
+                    >
+                    <mat-google-maps-autocomplete (onAutocompleteSelected)="onAutocompleteSelected($event)"
+                                                 (onLocationSelected)="onLocationSelected($event)"
+                                                 (onGermanAddressMapped)="onGermanAddressMapped($event)">
+                    </mat-google-maps-autocomplete>
+                    </div>
+                      <div fxFlex>
+                        <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+                          <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+                        </agm-map>
+                      </div>
+                    
+                     
+                    
+                    </div>
+             <div>
+                          <button mat-button matStepperPrevious>Retour</button>
+                          <button mat-button matStepperNext>Suivant</button>
+                        </div>
+                   
+                    </mat-step>
+  
+                    <mat-step>
+                      <ng-template matStepLabel>Terminé</ng-template>
+                      <p>Vous avez terminé.</p>
+                      <div>
+                        <button mat-button matStepperPrevious>Retour</button>
+                        <button mat-button (click)="addNewAnnonce()">Enregistrer</button>
+                      </div>
+                    </mat-step>
+
+                </mat-horizontal-stepper>
+       </div>
+     </div>
+   </div>
+ </div> 
+ -->
+
+ <div *ngIf="add==true"> 
+
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <!-- <li class="breadcrumb-item">Annonces</li> -->
+      <li class="breadcrumb-item active" aria-current="page"><a (click)="refresh()" [routerLink]="['/annonces']">Liste des annonces</a></li>
+      <li class="breadcrumb-item active" aria-current="page"><a href="#">Ajouter annonce</a></li>
+    </ol>
+  </nav>
+ <mat-horizontal-stepper [linear]="isLinear" #stepper>
+          
+  <mat-step [stepControl]="firstFormGroup" label="Infos annonce">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Infos annonce</ng-template>
+       <div class="row"> <div class="col-md-1"></div> <div class="col-md-1"></div></div>
+        <div class="row">
+          <div class="col-md-2">
+            <mat-form-field>
+              <mat-label>Titre</mat-label>
+              <input matInput placeholder="Titre"  id="titre" [(ngModel)]="form.titre" [ngModelOptions]="{standalone: true}" 
+             >
+            </mat-form-field>
+     
+          </div>
+    
+          <div class="col-md-1"></div> 
+          <div class="col-md-2">
+            <mat-form-field>
+              <mat-label>Type</mat-label>
+              <!-- <input matInput placeholder="Type d'abonnement" [ngModelOptions]="{standalone: true}"  [(ngModel)]="form.type_abonnement"  #tp="ngModel" required> -->
+              <mat-select  [(ngModel)]="form.type" [ngModelOptions]="{standalone: true}"    name="type" required>
+                <mat-option *ngFor="let type of types" [value]="type.value"   >
+                  {{type.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-1"></div> 
+          <div class="col-md-2">
+            <mat-form-field>
+              <mat-label>Prix</mat-label>
+              <input matInput placeholder="Prix " type="number"[ngModelOptions]="{standalone: true}" [(ngModel)]="form.prix"    #e="ngModel" required>
+            </mat-form-field>
+            <div *ngIf="e.invalid && e.touched">
+              <mat-error *ngIf="e.errors.required">
+                Prix is required
+                </mat-error>
+                </div>
+          </div>
+
+          <div class="col-md-1"></div> 
+          <div class="col-md-2">
+            <mat-form-field>
+              <mat-label>Superfecie</mat-label>
+              <input type="number" matInput placeholder="Superfecie"  [ngModelOptions]="{standalone: true}" [(ngModel)]="form.superfecie"   
+              required>
+            </mat-form-field>
+     
+          </div>                            
+        </div>
+      
+        <div class="row">
+
+
+          <div class="col-md-1"></div>
+
+        </div>
+
+        <div class="row">
+          <div >
+            <mat-form-field  style="width: 800px;">
+              <mat-label>Description</mat-label>
+              <textarea matInput   rows="10" cols="300" placeholder="Description"  [ngModelOptions]="{standalone: true}" [(ngModel)]="form.description"    #d="ngModel" required></textarea>
+            </mat-form-field>
+          </div>
+
+       
+
+
+
+          <div class="col-md-1"></div>
+
+        </div>
+
+        <div class="col-md-1"></div>
+        <div>
+          <button mat-button matStepperNext>Suivant</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" label="Détails annonce">
+      <form [formGroup]="secondFormGroup">
+    
+
+        <div class="row">
+        
+
+       
+          <div class="col-md-3">
+            <mat-form-field>
+              <mat-label>Chambres</mat-label>
+              <!-- <input matInput placeholder="Type d'abonnement" [ngModelOptions]="{standalone: true}"  [(ngModel)]="form.type_abonnement"  #tp="ngModel" required> -->
+              <mat-select  [(ngModel)]="form.nbre_chambres" [ngModelOptions]="{standalone: true}"   name="chambre" required>
+                <mat-option *ngFor="let chambre of chambres" [value]="chambre.value"   >
+                  {{chambre.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-1"></div>
+   
+          <div class="col-md-3">
+            <mat-form-field>
+              <mat-label>SDB</mat-label>
+              <!-- <input matInput placeholder="Type d'abonnement" [ngModelOptions]="{standalone: true}"  [(ngModel)]="form.type_abonnement"  #tp="ngModel" required> -->
+              <mat-select  [(ngModel)]="form.pieces_salleBain" [ngModelOptions]="{standalone: true}"    name="sdb" required>
+                <mat-option *ngFor="let sdb of salleBains" [value]="sdb.value"   >
+                  {{sdb.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-1"></div>
+
+          <div class="col-md-3  ">
+            <mat-label>Images</mat-label>
+          <label class="btn btn-default size">
+            <input type="file" multiple (change)="recuperFile($event)" />
+          </label>
+        </div>                           
+        </div>
+      
+        <div class="row">
+        
+           
+         
+            <mat-label>Catégorie</mat-label>
+        
+            <div   id="outer">   
+          <mat-radio-group aria-label="Select an option"  [ngModelOptions]="{standalone: true}" [(ngModel)]="form.categorie"  required>
+            <div  class="inner">  <mat-radio-button (click)="getAppartementOptions()" value="appartement">Appartement </mat-radio-button></div>&nbsp;&nbsp;&nbsp;
+            <div  class="inner"> <mat-radio-button (click)="getMaisonOptions()" value="maison">Maison</mat-radio-button></div>&nbsp;&nbsp;&nbsp;
+            <div  class="inner"><mat-radio-button (click)="getTerrainOptions()" value="terrain">Terrain</mat-radio-button></div>&nbsp;&nbsp;&nbsp;
+          </mat-radio-group>
+
+        </div>
+    
+        
+
+        </div>
+     <div *ngIf="model.appartement==true ">
+        <div class="row">
+         
+
+          <div class="col-md-3" >
+            <mat-form-field>
+              <mat-label>Etage</mat-label>
+              <input type="number" matInput placeholder="Etage"  [ngModelOptions]="{standalone: true}" [(ngModel)]="form.etage"   
+              required>
+            </mat-form-field>
+     
+          </div>
+        </div>
+          <div class="row">
+          <mat-label>Commodités</mat-label>
+            <div id="outer">
+            &nbsp;&nbsp;   
+            <mat-checkbox class="example-margin" [ngModelOptions]="{standalone: true}"[(ngModel)]="climatisation">Climatisation</mat-checkbox>&nbsp;&nbsp;&nbsp;
+            <mat-checkbox class="example-margin" [ngModelOptions]="{standalone: true}"[(ngModel)]="meuble">Meuble</mat-checkbox>&nbsp;&nbsp;&nbsp;
+            <mat-checkbox class="example-margin" [ngModelOptions]="{standalone: true}"[(ngModel)]="ascenseur">Ascenseur</mat-checkbox>&nbsp;&nbsp;&nbsp;
+            <mat-checkbox class="example-margin" [ngModelOptions]="{standalone: true}" [(ngModel)]="chauffage">Chauffage</mat-checkbox>&nbsp;&nbsp;&nbsp;
+            <mat-checkbox class="example-margin" [ngModelOptions]="{standalone: true}" [(ngModel)]="jardin">Jardin</mat-checkbox>&nbsp;&nbsp;&nbsp;
+          </div></div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+
+            <div class="row">
+            <mat-checkbox class="example-margin" [ngModelOptions]="{standalone: true}"[(ngModel)]="cuisine">Cuisine equipé</mat-checkbox>&nbsp;&nbsp;&nbsp;
+            <mat-checkbox class="example-margin" [ngModelOptions]="{standalone: true}" [(ngModel)]="parking">Parking</mat-checkbox>&nbsp;&nbsp;&nbsp;
+    
+          </div>
+ 
+
+          <div class="col-md-1"></div>
+
+  
+      </div>
+
+             <div  *ngIf=" model.maison==true ">
+              <div class="row">
+                <mat-label>Commodités</mat-label>
+                  <div id="outer">
+                  &nbsp;&nbsp;   
+                  <mat-checkbox class="example-margin" [ngModelOptions]="{standalone: true}" [(ngModel)]="climatisation">Climatisation</mat-checkbox>&nbsp;&nbsp;&nbsp;
+                  <mat-checkbox class="example-margin" [ngModelOptions]="{standalone: true}" [(ngModel)]="meuble">Meuble</mat-checkbox>&nbsp;&nbsp;&nbsp;
+                  <mat-checkbox class="example-margin" [ngModelOptions]="{standalone: true}" [(ngModel)]="ascenseur">Ascenseur</mat-checkbox>&nbsp;&nbsp;&nbsp;
+                  <mat-checkbox class="example-margin" [ngModelOptions]="{standalone: true}" [(ngModel)]="chauffage">Chauffage</mat-checkbox>&nbsp;&nbsp;&nbsp;
+                  <mat-checkbox class="example-margin" [ngModelOptions]="{standalone: true}"[(ngModel)]="jardin">Jardin</mat-checkbox>&nbsp;&nbsp;&nbsp;
+                </div></div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+
+                <div class="row">
+                  <mat-checkbox class="example-margin" [ngModelOptions]="{standalone: true}"[(ngModel)]="cuisine">Cuisine equipé</mat-checkbox>&nbsp;&nbsp;&nbsp;
+                  <mat-checkbox class="example-margin" [ngModelOptions]="{standalone: true}" [(ngModel)]="parking">Parking</mat-checkbox>&nbsp;&nbsp;&nbsp;
+          
+                </div>
+       
+      
+                <div class="col-md-1"></div>
+             </div>    
+      <div  *ngIf="model.terrain==true" >
+        <mat-label>Usage</mat-label>
+      
+        <div   id="outer">   
+      <mat-radio-group aria-label="Select an option"  [ngModelOptions]="{standalone: true}" [(ngModel)]="form.usage"  required>
+        <div  class="inner">  <mat-radio-button value="habitation">Habitation </mat-radio-button></div>&nbsp;&nbsp;&nbsp;
+        <div  class="inner"> <mat-radio-button value="commercial">Commercial</mat-radio-button></div>&nbsp;&nbsp;&nbsp;
+      </mat-radio-group>
+
+    </div>
+  </div>
+        <div class="col-md-1"></div>
+
+        
+        <div>
+          <button mat-button matStepperPrevious>Retour</button>
+          <button mat-button matStepperNext>Suivant</button>
+        </div>
+      </form>
+    </mat-step>
+
+  
+   <mat-step  label="Addresse">
+   
+    <h5>Saisir les informations relatives à votre adresse complète </h5>
+     <div class="row">
+
+    <div class="col-md-3">
+      <mat-form-field>
+        <mat-label>Région</mat-label>
+        <!-- <input matInput placeholder="Type d'abonnement" [ngModelOptions]="{standalone: true}"  [(ngModel)]="form.type_abonnement"  #tp="ngModel" required> -->
+        <mat-select  [(ngModel)]="villa" [ngModelOptions]="{standalone: true}" id="villa"  (selectionChange)="onChangeRegion(villa)" name="region" required>
+          <mat-option [value]="null" [disabled]="true" >Choisir une Région</mat-option>
+          <mat-option *ngFor="let villa of Villes" [value]="villa"   >
+            {{villa.nom}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-1"></div>
+    <div class="col-md-1"></div>
+    <div class="col-md-3" >
+      <mat-form-field >
+        <mat-label>Délégation</mat-label>
+
+        <!-- <input matInput placeholder="Type d'abonnement" [ngModelOptions]="{standalone: true}"  [(ngModel)]="form.type_abonnement"  #tp="ngModel" required> -->
+        <mat-select  [(ngModel)]="delegation" [ngModelOptions]="{standalone: true}"   (selectionChange)="onChangedelegation(delegation)"  name="delegation" required>
+          <mat-option [value]="null" [disabled]="true" >Choisir une délégation</mat-option>
+          <mat-option *ngFor="let delegation of delegations" [value]="delegation"   >
+            {{delegation.nom}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+ <!--    <div class="col-md-3"  *ngIf='selectedRegion!="ben arous" && selectedRegion!="manouba" && selectedRegion!="tunis" && selectedRegion!="ariana"'>
+      <mat-form-field >
+        <mat-label>Ville</mat-label>
+      
+        <mat-select  [(ngModel)]="addresse.ville" [ngModelOptions]="{standalone: true}"    name="villearous" required>
+          <mat-option   >
+       Ville
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div> -->
+
+ <!--    <div class="col-md-3" *ngIf='selectedRegion=="manouba "' >
+      <mat-form-field >
+        <mat-label>Ville</mat-label>
+  
+        <mat-select  [(ngModel)]="addresse.ville" [ngModelOptions]="{standalone: true}"    name="villemanouba" required>
+          <mat-option *ngFor="let villemanouba of villesManouba" [value]="villemanouba.value"   >
+            {{villemanouba.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+
+    <div class="col-md-3"*ngIf='selectedRegion=="tunis "' >
+      <mat-form-field >
+        <mat-label>Ville</mat-label>
+ 
+        <mat-select  [(ngModel)]="addresse.ville" [ngModelOptions]="{standalone: true}"    name="villetunis" required>
+          <mat-option *ngFor="let villetunis of villesTunis" [value]="villetunis.value"   >
+            {{villetunis.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+
+
+    <div class="col-md-3" *ngIf='selectedRegion=="ariana "'>
+      <mat-form-field >
+        <mat-label>Ville</mat-label>
+      
+        <mat-select  [(ngModel)]="addresse.ville" [ngModelOptions]="{standalone: true}"    name="villeariana" required>
+          <mat-option *ngFor="let villeariana of villesAriana" [value]="villeariana.value"   >
+            {{villeariana.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div> -->
+  
+
+  </div>
+
+  <!-- <div class="row">
+  
+    <div class="col-md-3" >
+      <mat-form-field>
+        <mat-label>Localité</mat-label>
+  
+        <mat-select  [(ngModel)]="localite" [ngModelOptions]="{standalone: true}"   (selectionChange)="onChangelocalite(localite)"  name="localite" required>
+          <mat-option [value]="null" [disabled]="true" >Choisir une localité</mat-option>
+          <mat-option *ngFor="let localite of localites" [value]="localite"   >
+            {{localite.nom}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-1"></div>
+    <div class="col-md-3" >
+      <mat-form-field>
+        <mat-label>Code postal</mat-label>
+        <input type="number" matInput placeholder="Code postal"  [ngModelOptions]="{standalone: true}" [(ngModel)]="addresse.code_postal"   
+        required>
+      </mat-form-field>
+
+    </div>
+  </div> -->
+
+ <!--    <div class="container" fxLayout="row" fxLayoutAlign="space-around center">
+
+      <div  fxFlex="40"
+    
+      class="autocomplete-container"
+    >
+    <mat-google-maps-autocomplete (onAutocompleteSelected)="onAutocompleteSelected($event)"
+                                 (onLocationSelected)="onLocationSelected($event)"
+                                 (onGermanAddressMapped)="onGermanAddressMapped($event)">
+    </mat-google-maps-autocomplete>
+    </div>
+      <div  fxFlex="60">
+        <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+          <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+        </agm-map>
+      </div>
+    
+    </div>  -->
+    
+<!--        <div class="container" fxLayout="row" fxLayoutAlign="space-around center">
+
+      <div  fxFlex="40"
+    
+      class="autocomplete-container"
+    >
+    <mat-google-maps-autocomplete (onAutocompleteSelected)="onAutocompleteSelected($event)"
+    (onLocationSelected)="onLocationSelected($event)"
+    (onGermanAddressMapped)="onGermanAddressMapped($event)">
+</mat-google-maps-autocomplete>
+  </div>
+
+  
+  <div  fxFlex="1">  </div>
+    <div  fxFlex="40"
+    
+    class="autocomplete-container"
+  >
+  <mat-google-maps-autocomplete (onAutocompleteSelected)="onAutocompleteSelected($event)"
+  (onLocationSelected)="onLocationSelected($event)"
+  (onGermanAddressMapped)="onGermanAddressMapped($event)">
+</mat-google-maps-autocomplete>
+   
+  </div>
+</div> -->
+<h5>Localiser votre adresse exacte</h5>
+   <div class="container" fxLayout="column" fxLayoutAlign="center">
+
+      <div fxFlex fxFlexAlign="left"
+    
+      class="autocomplete-container"
+    >
+  <!--   <mat-form-field>
+      <input matInput matGoogleMapsAutocomplete  [country]="tn" (onAutocompleteSelected)="onAutocompleteSelected($event)"
+      (onLocationSelected)="onLocationSelected($event)">
+    </mat-form-field> -->
+    
+      <mat-google-maps-autocomplete  (onAutocompleteSelected)="onAutocompleteSelected($event)"
+                                 (onLocationSelected)="onLocationSelected($event)"
+                                 (onGermanAddressMapped)="onGermanAddressMapped($event)" 
+                                 country="tn"
+                                 type="address"
+                               >
+    </mat-google-maps-autocomplete> 
+    </div>
+      <div fxFlex>
+        <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+          <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+        </agm-map>
+      </div>
+    
+     
+    
+    </div> 
+<div>
+          <button mat-button matStepperPrevious>Retour</button>
+          <button mat-button matStepperNext>Suivant</button>
+        </div>
+   
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Terminé</ng-template>
+      <p>Vous avez terminé.</p>
+      <div>
+        <button mat-button matStepperPrevious>Retour</button>
+        <button mat-button (click)="addNewAnnonce();getAllAnnonces()">Enregistrer</button>
+      </div>
+    </mat-step>
+
+</mat-horizontal-stepper>
+</div>
+
+
+
+
+<div *ngIf="update==true"> 
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <!-- <li class="breadcrumb-item">Annonces</li> -->
+      <li class="breadcrumb-item active" aria-current="page"><a (click)="refresh()" [routerLink]="['/annonces']">Liste des annonces</a></li>
+      <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/annonces']">Modifier annonce</a></li>
+    </ol>
+  </nav>
+  <mat-horizontal-stepper [linear]="isLinear" #stepper>
+           
+   <mat-step [stepControl]="firstFormGroup" label="Infos annonce">
+       <form [formGroup]="firstFormGroup">
+         <ng-template matStepLabel>Infos annonce</ng-template>
+        <div class="row"> <div class="col-md-1"></div> <div class="col-md-1"></div></div>
+         <div class="row">
+           <div class="col-md-2">
+             <mat-form-field>
+               <mat-label>Titre</mat-label>
+               <input matInput placeholder="Titre"     formControlName="titre" 
+              >
+             </mat-form-field>
+      
+           </div>
+     
+           <div class="col-md-1"></div> 
+           <div class="col-md-2">
+             <mat-form-field>
+               <mat-label>Type</mat-label>
+               <!-- <input matInput placeholder="Type d'abonnement" [ngModelOptions]="{standalone: true}"  [(ngModel)]="form.type_abonnement"  #tp="ngModel" required> -->
+               <mat-select    formControlName="type"   name="type" required>
+                 <mat-option *ngFor="let type of types" [value]="type.value"   >
+                   {{type.viewValue}}
+                 </mat-option>
+               </mat-select>
+             </mat-form-field>
+           </div>
+ 
+           <div class="col-md-1"></div> 
+           <div class="col-md-2">
+             <mat-form-field>
+               <mat-label>Prix</mat-label>
+               <input matInput placeholder="Prix " type="number"   formControlName="prix"  required>
+             </mat-form-field>
+           </div>
+ 
+           <div class="col-md-1"></div> 
+           <div class="col-md-2">
+             <mat-form-field>
+               <mat-label>Superfecie</mat-label>
+               <input type="number" matInput placeholder="Superfecie"  formControlName="superfecie"  
+               required>
+             </mat-form-field>
+      
+           </div>                            
+         </div>
+       
+         <div class="row">
+ 
+ 
+           <div class="col-md-1"></div>
+ 
+         </div>
+ 
+         <div class="row">
+           <div >
+             <mat-form-field  style="width: 800px;">
+               <mat-label>Description</mat-label>
+               <textarea matInput   rows="10" cols="300" placeholder="Description"  formControlName="description"  required></textarea>
+             </mat-form-field>
+           </div>
+ 
+        
+ 
+ 
+ 
+           <div class="col-md-1"></div>
+ 
+         </div>
+ 
+         <div class="col-md-1"></div>
+         <div>
+           <button mat-button matStepperNext>Suivant</button>
+         </div>
+       </form>
+     </mat-step>
+     <mat-step [stepControl]="secondFormGroup" label="Détails annonce">
+       <form [formGroup]="secondFormGroup">
+     
+ 
+         <div class="row">
+         
+ 
+        
+           <div class="col-md-3">
+             <mat-form-field>
+               <mat-label>Chambres</mat-label>
+               <!-- <input matInput placeholder="Type d'abonnement" [ngModelOptions]="{standalone: true}"  [(ngModel)]="form.type_abonnement"  #tp="ngModel" required> -->
+               <mat-select  formControlName="nbre_chambres"    name="chambre" required>
+                 <mat-option *ngFor="let chambre of chambres" [value]="chambre.value"   >
+                   {{chambre.viewValue}}
+                 </mat-option>
+               </mat-select>
+             </mat-form-field>
+           </div>
+ 
+           <div class="col-md-1"></div>
+    
+           <div class="col-md-3">
+             <mat-form-field>
+               <mat-label>SDB</mat-label>
+               <!-- <input matInput placeholder="Type d'abonnement" [ngModelOptions]="{standalone: true}"  [(ngModel)]="form.type_abonnement"  #tp="ngModel" required> -->
+               <mat-select   formControlName="pieces_salleBain"     name="sdb" required>
+                 <mat-option *ngFor="let sdb of salleBains" [value]="sdb.value"   >
+                   {{sdb.viewValue}}
+                 </mat-option>
+               </mat-select>
+             </mat-form-field>
+           </div>
+ 
+           <div class="col-md-1"></div>
+ 
+           <div class="col-md-3  ">
+             <mat-label>Images</mat-label>
+           <label class="btn btn-default size">
+             <input type="file" multiple (change)="recuperFile($event)" />
+           </label>
+         </div>                           
+         </div>
+       
+         <div class="row">
+         
+            
+          
+             <mat-label>Catégorie</mat-label>
+         
+             <div   id="outer">   
+           <mat-radio-group aria-label="Select an option"   formControlName="categorie" required>
+             <div  class="inner">  <mat-radio-button (click)="getAppartementOptions()" value="appartement">Appartement </mat-radio-button></div>&nbsp;&nbsp;&nbsp;
+             <div  class="inner"> <mat-radio-button (click)="getMaisonOptions()" value="maison">Maison</mat-radio-button></div>&nbsp;&nbsp;&nbsp;
+             <div  class="inner"><mat-radio-button (click)="getTerrainOptions()" value="terrain">Terrain</mat-radio-button></div>&nbsp;&nbsp;&nbsp;
+           </mat-radio-group>
+ 
+         </div>
+     
+         
+ 
+         </div>
+      <div *ngIf="model.appartement==true ">
+         <div class="row">
+          
+ 
+           <div class="col-md-3" >
+             <mat-form-field>
+               <mat-label>Etage</mat-label>
+               <input type="number" matInput placeholder="Etage"   formControlName="etage" 
+               required>
+             </mat-form-field>
+      
+           </div>
+         </div>
+           <div class="row">
+           <mat-label>Commodités</mat-label>
+             <div id="outer">
+             &nbsp;&nbsp;   
+             <mat-checkbox class="example-margin"  [ngModelOptions]="{standalone: true}" [(ngModel)]="climatisation"  >Climatisation</mat-checkbox>&nbsp;&nbsp;&nbsp;
+             <mat-checkbox class="example-margin"  [ngModelOptions]="{standalone: true}" [(ngModel)]="meuble" >Meuble</mat-checkbox>&nbsp;&nbsp;&nbsp;
+             <mat-checkbox class="example-margin"  [ngModelOptions]="{standalone: true}"  [(ngModel)]="ascenseur">Ascenseur</mat-checkbox>&nbsp;&nbsp;&nbsp;
+             <mat-checkbox class="example-margin"  [ngModelOptions]="{standalone: true}" [(ngModel)]="chauffage">Chauffage</mat-checkbox>&nbsp;&nbsp;&nbsp;
+             <mat-checkbox class="example-margin"  [ngModelOptions]="{standalone: true}"  [(ngModel)]="jardin" >Jardin</mat-checkbox>&nbsp;&nbsp;&nbsp;
+           </div></div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+ 
+             <div class="row">
+             <mat-checkbox class="example-margin" [ngModelOptions]="{standalone: true}" [(ngModel)]="cuisine" >Cuisine equipé</mat-checkbox>&nbsp;&nbsp;&nbsp;
+             <mat-checkbox class="example-margin"  [ngModelOptions]="{standalone: true}"[(ngModel)]="parking" >Parking</mat-checkbox>&nbsp;&nbsp;&nbsp;
+     
+           </div>
+  
+ 
+           <div class="col-md-1"></div>
+ 
+   
+       </div>
+ 
+              <div  *ngIf=" model.maison==true ">
+               <div class="row">
+                 <mat-label>Commodités</mat-label>
+                   <div id="outer">
+                   &nbsp;&nbsp;   
+                   <mat-checkbox class="example-margin" [ngModelOptions]="{standalone: true}"[(ngModel)]="climatisation" >Climatisation</mat-checkbox>&nbsp;&nbsp;&nbsp;
+                   <mat-checkbox class="example-margin"  [ngModelOptions]="{standalone: true}" [(ngModel)]="meuble"  >Meuble</mat-checkbox>&nbsp;&nbsp;&nbsp;
+                   <mat-checkbox class="example-margin"  [ngModelOptions]="{standalone: true}" [(ngModel)]="ascenseur">Ascenseur</mat-checkbox>&nbsp;&nbsp;&nbsp;
+                   <mat-checkbox class="example-margin" [ngModelOptions]="{standalone: true}"  [(ngModel)]="chauffage">Chauffage</mat-checkbox>&nbsp;&nbsp;&nbsp;
+                   <mat-checkbox class="example-margin" [ngModelOptions]="{standalone: true}" [(ngModel)]="jardin" >Jardin</mat-checkbox>&nbsp;&nbsp;&nbsp;
+                 </div></div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+         
+                 <div class="row">
+                  <mat-checkbox class="example-margin" [ngModelOptions]="{standalone: true}"[(ngModel)]="cuisine">Cuisine equipé</mat-checkbox>&nbsp;&nbsp;&nbsp;
+                  <mat-checkbox class="example-margin" [ngModelOptions]="{standalone: true}" [(ngModel)]="parking">Parking</mat-checkbox>&nbsp;&nbsp;&nbsp;
+          
+                </div>
+       
+      
+                <div class="col-md-1"></div> 
+            </div>  
+       <div  *ngIf="model.terrain==true" >
+         <mat-label>Usage</mat-label>
+       
+         <div   id="outer">   
+       <mat-radio-group aria-label="Select an option"  formControlName="usage"  required>
+         <div  class="inner">  <mat-radio-button value="habitation">Habitation </mat-radio-button></div>&nbsp;&nbsp;&nbsp;
+         <div  class="inner"> <mat-radio-button value="commercial">Commercial</mat-radio-button></div>&nbsp;&nbsp;&nbsp;
+       </mat-radio-group>
+ 
+     </div>
+   </div>
+         <div class="col-md-1"></div>
+ 
+         
+         <div>
+           <button mat-button matStepperPrevious>Retour</button>
+           <button mat-button matStepperNext>Suivant</button>
+         </div>
+       </form>
+     </mat-step>
+ 
+   
+    <mat-step  label="Addresse">
+      <form [formGroup]="addressFormGroup">
+     <h5>Saisir les informations relatives à votre adresse complète </h5>
+      <div class="row">
+ 
+     <div class="col-md-3">
+       <mat-form-field>
+         <mat-label>Région</mat-label>
+         <!-- <input matInput placeholder="Type d'abonnement" [ngModelOptions]="{standalone: true}"  [(ngModel)]="form.type_abonnement"  #tp="ngModel" required> -->
+         <mat-select  id="villa"  formControlName="villa" [ngModelOptions]="{standalone: true}" [(ngModel)]="villa"  (selectionChange)="onChangeRegion(villa)" name="region" required>
+           <mat-option [value]="null" [disabled]="true" >Choisir une Région</mat-option>
+           <mat-option *ngFor="let villa of Villes" [value]="villa"   >
+             {{villa.nom}}
+           </mat-option>
+         </mat-select>
+       </mat-form-field>
+     </div>
+ 
+     <div class="col-md-1"></div>
+     <div class="col-md-1"></div>
+     <div class="col-md-3" >
+       <mat-form-field >
+         <mat-label>Délégation</mat-label>
+ 
+         <!-- <input matInput placeholder="Type d'abonnement" [ngModelOptions]="{standalone: true}"  [(ngModel)]="form.type_abonnement"  #tp="ngModel" required> -->
+         <mat-select  formControlName="delegation"  [ngModelOptions]="{standalone: true}" [(ngModel)]="delegation"  (selectionChange)="onChangedelegation(delegation)"  name="delegation" required>
+           <mat-option [value]="null" [disabled]="true" >Choisir une délégation</mat-option>
+           <mat-option *ngFor="let delegation of delegations" [value]="delegation"   >
+             {{delegation.nom}}
+           </mat-option>
+         </mat-select>
+       </mat-form-field>
+
+   </div>
+  </div>
+  
+ <h5>Localiser votre adresse exacte</h5>
+    <div class="container" fxLayout="column" fxLayoutAlign="center">
+ 
+       <div fxFlex fxFlexAlign="left"
+     
+       class="autocomplete-container"
+     >
+     
+       <mat-google-maps-autocomplete  (onAutocompleteSelected)="onAutocompleteSelected($event)"
+                                  (onLocationSelected)="onLocationSelected($event)"
+                                  (onGermanAddressMapped)="onGermanAddressMapped($event)" 
+                                  country="tn"
+                                  type="address"
+                                >
+     </mat-google-maps-autocomplete> 
+     </div>
+       <div fxFlex>
+         <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+           <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+         </agm-map>
+       </div>
+     
+      
+     
+     </div> 
+ <div>
+           <button mat-button matStepperPrevious>Retour</button>
+           <button mat-button matStepperNext>Suivant</button>
+         </div>
+     
+        </form>
+     </mat-step>
+ 
+     <mat-step>
+       <ng-template matStepLabel>Terminé</ng-template>
+       <p>Vous avez terminé.</p>
+       <div>
+         <button mat-button matStepperPrevious>Retour</button>
+         <button mat-button (click)="updateAnnonce();getAllAnnonces()">Enregistrer</button>
+       </div>
+     </mat-step>
+ 
+ </mat-horizontal-stepper>
+ </div>
+
+
+
+

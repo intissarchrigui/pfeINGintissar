@@ -1,0 +1,86 @@
+ .chat-messages-show-container{
+    background: #c3c3c3;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+ }
+ .chat-messages-show-list {
+    list-style-type:none;
+    margin: 0;
+    padding: 0;
+ }
+ .chat-messages-create-container{
+    background: #616161;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+ }
+ .chat-messages-create-input {
+    padding: 12px;
+    margin: 29px 30px;
+    flex:2
+ }
+ .chat-messages-create-button {
+    height: 50px;
+    margin: auto 40px;
+    width: 100px;
+ }
+ .btn-color{
+    color:orange
+ }
+
+ .btn-first{
+   display: inline-block;
+   padding: 15px 40px;
+   position: relative;
+   transition: 0.5s all;
+   background: transparent;
+   color: inherit;
+   border: 1px solid transparent;
+   font-size: 14px;
+   overflow: hidden;
+   z-index: 1;
+   text-align: center;
+   text-transform: uppercase;
+}
+.btn-submit{
+   border-color: #ff5722;
+   color: #ff5722;
+   background: #fff; 
+}
+.full-width {
+   width: 70%;
+}
+.full-height {
+   height: 70%;
+}
+
+.btn-submit:before{
+   content: '';
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   height: 100%;
+   background-color: #00a3c8;
+   width: 0%;
+   transition: 0.5s all;
+   z-index: -1;
+}
+.btn-small:hover,
+.btn-submit:hover{
+   color: #fff;
+}
+.btn-small:focus,
+.btn-submit:focus{
+   background-color: #00a3c8;
+   color: #fff;
+}
+.btn-small:hover:before,
+.btn-submit:hover:before{
+   width: 100%;
+} 
+.over{
+   overflow-wrap:break-word;
+}

@@ -1,0 +1,80 @@
+
+<div *ngIf="clickbuttonEventData.Open==true" #customizer class="customizer border-left-blue-grey border-left-lighten-4 d-none d-sm-none d-md-block" [ngClass]="{open: clickbuttonEventData.Open}">
+    <a class="customizer-close" (click)="closeCustomizer()">
+      <i class="ft-x font-medium-3"></i>
+    </a>
+    <a class="customizer-toggle bg-danger colortogg" id="customizer-toggle-icon" (click)="toggleCustomizer()">
+      <i class="ft-file-text font-medium-4 fa fa-spin white align-middle" style="margin-top:15px"></i>
+    </a>
+   <!-- <h2> {{clickbuttonEventData.titre}}</h2> -->
+    <div class="hotel-grid mb-xl-30">
+      <div class="hotel-grid-wrapper bx-wrapper">
+       <!--    <div class="image-sec p-relative">
+              <a href="#">
+                  <img src="../../../assets/assets/images/hotels/1.png" class="width" alt="img">
+              </a>
+          </div> -->
+          <div class="detail-slider-for mb-xl-20 magnific-gallery">
+            <ngb-carousel>
+                <ng-template ngbSlide *ngFor="let img of clickbuttonEventData.fileimages">
+                    <div class="slide-item">
+                        <a href="../../../assets/assets/images/hotels/slide_1.jpg" class="popup">
+                            <img src="http://localhost:3000/annonce/getFile/{{
+                              img
+                              }}" class="image-fit" alt="img">
+                        </a>
+                    </div>
+             
+                </ng-template>
+             
+         <!--        <ng-template ngbSlide>
+                    <div class="slide-item">
+                        <a href="assets/assets/images/hotels/slide_1.jpg" class="popup">
+                            <img src="assets/assets/images/hotels/slide_1.jpg" class="image-fit" alt="img">
+                        </a>
+                    </div>
+              
+                </ng-template>
+                <ng-template ngbSlide>
+                    <div class="slide-item">
+                        <a href="assets/assets/images/hotels/slide_2.jpg" class="popup">
+                            <img src="assets/assets/images/hotels/slide_2.jpg" class="image-fit" alt="img">
+                        </a>
+                    </div>
+               
+                </ng-template> -->
+                </ngb-carousel>
+              
+
+        </div>
+
+          <div class="hotel-grid-caption padding-20 bg-custom-white p-relative">
+              <h4 class="title fs-16"><a href="#" class="text-custom-black">{{clickbuttonEventData.titre}}<small class="text-light-dark">{{clickbuttonEventData.addresse.addresse_exacte
+            }}</small></a></h4>
+              <span class="price"><small>prix</small>{{clickbuttonEventData.prix}} TND</span>
+         <!--      <div class="feedback">
+                      <div class="ratings">
+                          <span class="text-yellow fs-12"><i class="fas fa-star"></i></span>
+                          <span class="text-yellow fs-12"><i class="fas fa-star"></i></span>
+                          <span class="text-yellow fs-12"><i class="fas fa-star"></i></span>
+                          <span class="text-yellow fs-12"><i class="fas fa-star"></i></span>
+                          <span class="text-light-dark fs-12"><i class="fas fa-star"></i></span>
+                      </div>
+                  <span class="review fs-12 text-light-dark">270 reviews</span>
+              </div> -->
+              <p class="text-light-dark">{{clickbuttonEventData.description}}</p>
+              <div class="action">
+                  <a  (click)="open(clickbuttonEventData._id)" class="btn-first btn-small" >Prendre rendez vous</a>
+    
+                  <!-- window.open('http://localhost:4200/details-annonces','clickbuttonEventData._id'); -->
+               <!-- <buttton   (click)="open(clickbuttonEventData._id)"></buttton>  -->
+                  <!-- <a class="btn-first btn-submit yellow" href="#">VIEW</a> -->
+              </div>
+          </div>
+      </div>
+  </div>
+  </div>
+
+  <app-maps (clickbuttonEvent)="clickbuttonEventData=$event"></app-maps>
+
+  <app-footer></app-footer>
